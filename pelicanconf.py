@@ -1,6 +1,6 @@
-AUTHOR = "xlyk"
-SITENAME = "xlyk blog"
-SITEURL = ""
+AUTHOR = "Kyle Hanks"
+SITENAME = "Kyle's blog"
+SITEURL = "https://xlyk.github.io"
 
 PATH = "content"
 TIMEZONE = "UTC"

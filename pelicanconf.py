@@ -30,7 +30,7 @@ EXTRA_PATH_METADATA = {
     # "extra/CNAME": {"path": "CNAME"},
 }
 
-# THEME = "themes/Flex"  # Optional: if you add Flex as a submodule
+THEME = "themes/elegant"  # Using Elegant theme
 
 # Dev convenience
 RELATIVE_URLS = True

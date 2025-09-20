@@ -1,0 +1,12 @@
+# Pelican
+output/
+cache/
+.pelican-cache/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store

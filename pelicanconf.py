@@ -24,6 +24,7 @@ MARKDOWN = {
 # Static files
 STATIC_PATHS = ["images", "extra"]
 EXTRA_PATH_METADATA = {
+    "extra/custom.css": {"path": "theme/css/custom.css"},
     # Example: add a robots.txt by placing it in content/extra/robots.txt
     # "extra/robots.txt": {"path": "robots.txt"},
     # Example: if you add a custom domain, place CNAME in content/extra/CNAME

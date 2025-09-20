@@ -1,0 +1,642 @@
+/* Modern Dark Theme for Pelican Elegant
+   Design principles:
+   - Warm dark backgrounds (not pure black) for eye comfort
+   - Soft accent colors that aren't harsh
+   - High enough contrast for readability
+   - Smooth transitions for modern feel
+*/
+
+/* CSS Variables for easy customization - NEON HIGHLIGHTS THEME */
+:root {
+  /* Dark theme colors - Ultra dark for maximum neon contrast */
+  --bg-primary: #0D0D0D;         /* Main background - almost black */
+  --bg-secondary: #1a1a1a;       /* Card/element backgrounds - slightly lighter */
+  --bg-tertiary: #262626;        /* Hover states - subtle lift */
+  
+  /* Text colors */
+  --text-primary: #FFFFFF;       /* Main text - pure white for clarity */
+  --text-secondary: #E0E0E0;     /* Secondary text - slightly dimmed */
+  --text-muted: #808080;         /* Muted text - gray */
+  
+  /* Neon accent colors */
+  --accent-primary: #1E90FF;     /* Links, primary buttons - electric blue */
+  --accent-hover: #FF0099;       /* Hover state - vivid pink */
+  --accent-secondary: #00FF85;   /* Secondary accent - neon green */
+  --accent-success: #00FF85;     /* Success states - neon green */
+  --accent-warning: #FFD700;     /* Warning states - gold */
+  
+  /* Borders and dividers */
+  --border-color: #2a2a2a;
+  --border-light: #1f1f1f;
+  
+  /* Code blocks */
+  --code-bg: #0a0a0a;
+  --code-border: #2a2a2a;
+  
+  /* Shadows and glows for neon effect */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.7);
+  --glow-blue: 0 0 20px rgba(30, 144, 255, 0.5);
+  --glow-pink: 0 0 20px rgba(255, 0, 153, 0.5);
+  --glow-green: 0 0 20px rgba(0, 255, 133, 0.5);
+  
+  /* Typography */
+  --font-display: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Helvetica Neue', sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Helvetica Neue', sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', monospace;
+}
+
+/* Global transitions for smooth interactions */
+* {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Base body styling */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Main content area */
+#content {
+  background-color: var(--bg-primary);
+}
+
+/* Navigation bar with neon accent */
+.navbar {
+  background: var(--bg-primary);
+  border: none;
+  border-bottom: 2px solid var(--accent-primary);
+  box-shadow: 0 2px 20px rgba(30, 144, 255, 0.3);
+  margin-bottom: 2rem;
+}
+
+.navbar-inner {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.navbar .brand {
+  color: var(--accent-secondary) !important;
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-shadow: 0 0 10px rgba(0, 255, 133, 0.8);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.navbar .brand:hover {
+  color: var(--accent-hover) !important;
+  text-shadow: 0 0 15px rgba(255, 0, 153, 0.8);
+  transform: translateY(-1px);
+}
+
+/* Navigation links */
+.navbar .nav > li > a {
+  color: var(--text-secondary) !important;
+  text-shadow: none;
+  font-weight: 500;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin: 4px;
+  transition: all 0.2s ease;
+}
+
+.navbar .nav > li > a:hover,
+.navbar .nav > .active > a {
+  background-color: var(--bg-tertiary) !important;
+  color: var(--accent-primary) !important;
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+/* Search bar */
+.navbar-search .search-query {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 6px 12px;
+  transition: all 0.2s ease;
+}
+
+.navbar-search .search-query:focus {
+  background-color: var(--bg-secondary);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(122, 162, 247, 0.1);
+}
+
+.navbar-search .search-query::placeholder {
+  color: var(--text-muted);
+}
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  line-height: 1.3;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-hover), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(30, 144, 255, 0.5);
+  animation: neonPulse 2s ease-in-out infinite alternate;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+  color: var(--accent-primary);
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Links with neon effect */
+a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+a:hover {
+  color: var(--accent-hover);
+  text-decoration: none;
+  text-shadow: 0 0 8px rgba(255, 0, 153, 0.8);
+}
+
+/* Article styling with neon accents */
+article {
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--accent-primary);
+  box-shadow: 0 0 10px rgba(30, 144, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+article::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-secondary), transparent);
+  animation: slideGlow 3s linear infinite;
+}
+
+@keyframes slideGlow {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+article:hover {
+  border-color: var(--accent-hover);
+  box-shadow: 0 0 20px rgba(255, 0, 153, 0.4);
+  transform: translateY(-2px);
+}
+
+.article-content {
+  color: var(--text-primary);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+/* Article metadata */
+.article-meta {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+/* Tags and categories with neon borders */
+.tag, .label {
+  background-color: transparent;
+  color: var(--accent-secondary);
+  border: 1px solid var(--accent-secondary);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-block;
+  margin: 4px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tag:hover, .label:hover {
+  background-color: var(--accent-hover);
+  color: var(--bg-primary);
+  border-color: var(--accent-hover);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 0, 153, 0.6);
+}
+
+/* Code blocks with neon accents */
+pre, code {
+  background-color: var(--code-bg);
+  border: 1px solid var(--accent-primary);
+  border-radius: 4px;
+  color: var(--accent-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+pre {
+  padding: 1.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  box-shadow: 0 0 15px rgba(30, 144, 255, 0.2);
+  position: relative;
+}
+
+pre::before {
+  content: 'CODE';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 2px 8px;
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-bottom-left-radius: 4px;
+}
+
+code {
+  padding: 2px 6px;
+  border-radius: 2px;
+  background-color: rgba(0, 255, 133, 0.1);
+  border-color: rgba(0, 255, 133, 0.3);
+}
+
+pre code {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+}
+
+/* Syntax highlighting adjustments */
+.highlight {
+  background-color: var(--code-bg) !important;
+  border: 1px solid var(--accent-primary);
+  border-radius: 4px;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 0 15px rgba(30, 144, 255, 0.2);
+}
+
+/* Blockquotes */
+blockquote {
+  border-left: 4px solid var(--accent-secondary);
+  background-color: var(--bg-secondary);
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+/* Tables */
+table {
+  background-color: var(--bg-secondary);
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+  margin: 1.5rem 0;
+  box-shadow: var(--shadow-sm);
+}
+
+th {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  font-weight: 600;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 2px solid var(--border-color);
+}
+
+td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-primary);
+}
+
+tr:hover {
+  background-color: var(--bg-tertiary);
+}
+
+/* Footer */
+footer {
+  background-color: var(--bg-secondary);
+  color: var(--text-muted);
+  padding: 3rem 0;
+  margin-top: 4rem;
+  border-top: 1px solid var(--border-color);
+}
+
+footer a {
+  color: var(--text-secondary);
+}
+
+footer a:hover {
+  color: var(--accent-primary);
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: var(--bg-secondary);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--border-light);
+}
+
+/* Pagination */
+.pagination {
+  margin: 2rem 0;
+}
+
+.pagination a,
+.pagination span {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 8px 12px;
+  margin: 0 4px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.pagination a:hover {
+  background-color: var(--accent-primary);
+  color: var(--bg-primary);
+  border-color: var(--accent-primary);
+  transform: translateY(-1px);
+}
+
+.pagination .active {
+  background-color: var(--accent-primary);
+  color: var(--bg-primary);
+  border-color: var(--accent-primary);
+}
+
+/* Forms and inputs */
+input[type="text"],
+input[type="email"],
+textarea,
+select {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus,
+select:focus {
+  background-color: var(--bg-secondary);
+  border-color: var(--accent-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(122, 162, 247, 0.1);
+}
+
+/* Buttons with neon glow */
+.btn {
+  background-color: transparent;
+  color: var(--accent-primary);
+  border: 2px solid var(--accent-primary);
+  padding: 10px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:hover {
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: var(--bg-primary);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 0, 153, 0.6);
+  text-decoration: none;
+}
+
+/* Archive and category pages */
+.archive-entry {
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border-light);
+  transition: all 0.2s ease;
+}
+
+.archive-entry:hover {
+  background-color: var(--bg-tertiary);
+  box-shadow: var(--shadow-sm);
+  transform: translateX(4px);
+}
+
+/* Comments section if using Disqus */
+#disqus_thread {
+  background-color: var(--bg-secondary);
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-top: 2rem;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  body {
+    font-size: 15px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  article {
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+  
+  .navbar .brand {
+    font-size: 1.25rem;
+  }
+}
+
+/* Elegant theme specific overrides */
+.elegant-article {
+  background: transparent;
+}
+
+.elegant-title {
+  color: var(--text-primary);
+}
+
+/* Override Bootstrap defaults for dark theme */
+.well {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.table {
+  background-color: var(--bg-secondary);
+}
+
+.table-striped tbody > tr:nth-child(odd) > td {
+  background-color: var(--bg-tertiary);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection highlighting */
+::selection {
+  background-color: var(--accent-primary);
+  color: var(--bg-primary);
+}
+
+::-moz-selection {
+  background-color: var(--accent-primary);
+  color: var(--bg-primary);
+}
+
+/* Scrollbar styling (webkit browsers) */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
+
+/* Neon animations */
+@keyframes neonPulse {
+  0% {
+    filter: brightness(1) drop-shadow(0 0 10px currentColor);
+  }
+  50% {
+    filter: brightness(1.2) drop-shadow(0 0 20px currentColor);
+  }
+  100% {
+    filter: brightness(1) drop-shadow(0 0 10px currentColor);
+  }
+}
+
+@keyframes neonGlow {
+  0% {
+    box-shadow: 0 0 5px var(--accent-primary),
+                0 0 10px var(--accent-primary),
+                0 0 15px var(--accent-primary);
+  }
+  100% {
+    box-shadow: 0 0 10px var(--accent-primary),
+                0 0 20px var(--accent-primary),
+                0 0 30px var(--accent-primary);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes borderFlow {
+  0% {
+    border-color: var(--accent-primary);
+  }
+  33% {
+    border-color: var(--accent-hover);
+  }
+  66% {
+    border-color: var(--accent-secondary);
+  }
+  100% {
+    border-color: var(--accent-primary);
+  }
+}
+
+article, .archive-entry {
+  animation: fadeIn 0.4s ease;
+}
+
+/* Apply subtle neon glow to focused elements */
+input:focus,
+textarea:focus,
+select:focus {
+  animation: neonGlow 1.5s ease-in-out infinite alternate;
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .navbar, footer, .sidebar {
+    display: none;
+  }
+}

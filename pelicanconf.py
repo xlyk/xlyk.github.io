@@ -21,6 +21,9 @@ MARKDOWN = {
     },
 }
 
+# Use dark theme for code highlighting
+PYGMENTS_STYLE = 'monokai'
+
 # Static files
 STATIC_PATHS = ["images", "extra"]
 EXTRA_PATH_METADATA = {

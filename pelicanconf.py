@@ -28,9 +28,11 @@ EXTRA_PATH_METADATA = {
     # "extra/robots.txt": {"path": "robots.txt"},
     # Example: if you add a custom domain, place CNAME in content/extra/CNAME
     # "extra/CNAME": {"path": "CNAME"},
+    "extra/custom.css": {"path": "static/custom.css"},
 }
 
 THEME = "themes/elegant"  # Using Elegant theme
+CUSTOM_CSS = "static/custom.css"  # Elegant will include this CSS if provided
 
 # Dev convenience
 RELATIVE_URLS = True

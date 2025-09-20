@@ -1,0 +1,25 @@
+/* More breathing room in article content */
+.article-content, .post-content, article {
+  line-height: 1.7;
+}
+
+/* Headings */
+.article-content h2 { margin-top: 2.4rem; margin-bottom: 0.8rem; scroll-margin-top: 80px; }
+.article-content h3 { margin-top: 1.8rem; margin-bottom: 0.6rem; scroll-margin-top: 80px; }
+
+/* Paragraphs and lists */
+.article-content p { margin: 0.85rem 0 1.15rem; }
+.article-content ul, .article-content ol { margin: 0.8rem 0 1.2rem 1.4rem; }
+.article-content li + li { margin-top: 0.3rem; }
+
+/* Code blocks (Pelican + Pygments) */
+.article-content pre,
+.article-content div.highlight {
+  margin: 1.2rem 0;
+  padding: 0.9rem 1rem;
+  line-height: 1.5;
+}
+
+/* Blockquotes and rules */
+.article-content blockquote { margin: 1.2rem 0; padding-left: 1rem; border-left: 3px solid #eee; }
+.article-content hr { margin: 2rem 0; }

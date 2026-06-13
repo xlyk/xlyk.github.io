@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Search — {{ super() }}{% endblock %}
+{% block content %}
+<h1 class="glitch-title" data-txt="SEARCH">SEARCH</h1>
+<div class="search-box">
+  <span class="ps1">guest@xlyk:~$ grep</span>
+  <input id="q" type="search" autocomplete="off" placeholder="query…" aria-label="Search posts">
+  <span class="cur" aria-hidden="true"></span>
+</div>
+<p id="search-status" class="search-status" aria-live="polite">type to search {{ articles|length }} posts</p>
+<div id="search-results" class="search-results"></div>
+{% endblock %}

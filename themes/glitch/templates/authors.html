@@ -1,4 +1,10 @@
 {% extends 'base.html' %}
+{% block title %}Authors — {{ super() }}{% endblock %}
 {% block content %}
-{% for author, articles in authors %}<p><a href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a> ({{ articles|length }})</p>{% endfor %}
+<h1 class="glitch-title" data-txt="AUTHORS">AUTHORS</h1>
+<div class="chips chips-index">
+  {% for author, arts in authors %}
+  <a class="chip" href="{{ SITEURL }}/{{ author.url }}">{{ author }} <span class="count">{{ arts|length }}</span></a>
+  {% endfor %}
+</div>
 {% endblock %}

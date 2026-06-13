@@ -1,4 +1,10 @@
 {% extends 'base.html' %}
+{% block title %}Categories — {{ super() }}{% endblock %}
 {% block content %}
-{% for category, articles in categories %}<p><a href="{{ SITEURL }}/{{ category.url }}">{{ category }}</a> ({{ articles|length }})</p>{% endfor %}
+<h1 class="glitch-title" data-txt="CATEGORIES">CATEGORIES</h1>
+<div class="chips chips-index">
+  {% for category, arts in categories %}
+  <a class="chip" href="{{ SITEURL }}/{{ category.url }}">{{ category }} <span class="count">{{ arts|length }}</span></a>
+  {% endfor %}
+</div>
 {% endblock %}

@@ -1,0 +1,247 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Glitch — Kyle's blog mockup</title><style>html,body{margin:0;background:#11151c;font-family:system-ui}.page{max-width:980px;margin:24px auto;padding:0 16px}</style></head><body><div class=page><style>
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap');
+
+.mk-glitch{ --void:#08080d; --void2:#0a0a12; --mag:#ff2079; --mag2:#ff00c1; --cyan:#05d9e8; --cyan2:#00fff7; --grn:#39ff14; --wht:#f4f4ff; --dim:#8a8aa8; --mono:'Share Tech Mono','SFMono-Regular',Consolas,monospace; --disp:'VT323','Share Tech Mono',monospace; box-sizing:border-box; }
+.mk-glitch *,.mk-glitch *::before,.mk-glitch *::after{ box-sizing:border-box; }
+
+.mk-glitch .frame{ background:var(--color-background-secondary); border:1px solid var(--color-border-tertiary); border-radius:12px; overflow:hidden; max-width:980px; margin:0 auto; box-shadow:0 1px 3px rgba(0,0,0,.18); }
+.mk-glitch .bar{ display:flex; align-items:center; gap:12px; padding:10px 14px; border-bottom:1px solid var(--color-border-tertiary); background:var(--color-background-secondary); }
+.mk-glitch .bar .dots{ display:flex; gap:7px; }
+.mk-glitch .bar .dots i{ width:11px; height:11px; border-radius:50%; background:var(--color-border-tertiary); display:block; }
+.mk-glitch .bar .url{ flex:1; text-align:center; }
+.mk-glitch .bar .url span{ display:inline-block; font:12px/1.4 var(--color-font-mono,monospace); color:var(--color-text-primary); background:var(--color-background-primary,#fff); border:1px solid var(--color-border-tertiary); border-radius:999px; padding:4px 16px; opacity:.85; }
+.mk-glitch .bar .seg{ display:flex; border:1px solid var(--color-border-tertiary); border-radius:8px; overflow:hidden; }
+.mk-glitch .bar .seg button{ font:12px/1 -apple-system,system-ui,sans-serif; color:var(--color-text-primary); background:transparent; border:0; padding:6px 12px; cursor:pointer; }
+.mk-glitch .bar .seg button+button{ border-left:1px solid var(--color-border-tertiary); }
+.mk-glitch .bar .seg button[data-active]{ background:var(--color-text-primary); color:var(--color-background-secondary); }
+
+.mk-glitch .screen{ position:relative; min-height:620px; background:radial-gradient(120% 90% at 50% 0%,#10101e 0%,var(--void2) 45%,var(--void) 100%); color:var(--wht); font-family:var(--mono); font-size:15px; line-height:1.65; overflow:hidden; isolation:isolate; }
+.mk-glitch .screen::before{ content:""; position:absolute; inset:0; pointer-events:none; z-index:6; background:repeating-linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,0) 2px,rgba(0,0,0,.28) 3px,rgba(0,0,0,0) 4px); mix-blend-mode:multiply; animation:mk-scan 9s linear infinite; opacity:.6; }
+.mk-glitch .screen::after{ content:""; position:absolute; inset:0; pointer-events:none; z-index:7; background:radial-gradient(120% 120% at 50% 50%,rgba(0,0,0,0) 55%,rgba(0,0,0,.55) 100%); box-shadow:inset 0 0 90px rgba(0,0,0,.55); animation:mk-flicker 7s steps(60) infinite; }
+@keyframes mk-scan{ 0%{ background-position:0 0; } 100%{ background-position:0 80px; } }
+@keyframes mk-flicker{ 0%,100%{ opacity:1; } 8%{ opacity:.94; } 9%{ opacity:1; } 41%{ opacity:.97; } 42%{ opacity:.91; } 43%{ opacity:1; } 77%{ opacity:.96; } }
+
+.mk-glitch .noise{ position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.05; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"); }
+
+.mk-glitch .view{ position:relative; z-index:4; padding:28px 30px 0; }
+
+.mk-glitch .topbar{ display:flex; align-items:center; justify-content:space-between; gap:14px; font-size:12px; color:var(--dim); letter-spacing:.06em; border-bottom:1px dashed rgba(5,217,232,.28); padding-bottom:8px; margin-bottom:22px; flex-wrap:wrap; }
+.mk-glitch .topbar .sig{ color:var(--mag); text-shadow:0 0 8px rgba(255,32,121,.55); }
+.mk-glitch .topbar .ok{ color:var(--grn); text-shadow:0 0 8px rgba(57,255,20,.5); }
+.mk-glitch .hex{ color:var(--cyan); opacity:.7; }
+
+.mk-glitch .hero h1{ font-family:var(--disp); font-weight:400; font-size:62px; line-height:.9; margin:6px 0 4px; letter-spacing:.02em; color:var(--wht); position:relative; text-shadow:2px 0 var(--mag),-2px 0 var(--cyan); animation:mk-glitch 5.5s steps(1) infinite; }
+.mk-glitch .hero h1::after{ content:attr(data-txt); position:absolute; left:0; top:0; color:var(--cyan2); text-shadow:-2px 0 var(--mag2); clip-path:inset(0 0 100% 0); opacity:.85; animation:mk-slice 5.5s steps(1) infinite; }
+@keyframes mk-glitch{ 0%,92%,100%{ transform:translate(0,0); clip-path:inset(0 0 0 0); } 93%{ transform:translate(-3px,1px); clip-path:inset(12% 0 58% 0); } 95%{ transform:translate(3px,-1px); clip-path:inset(62% 0 8% 0); } 97%{ transform:translate(-2px,0); clip-path:inset(34% 0 40% 0); } }
+@keyframes mk-slice{ 0%,92%,100%{ clip-path:inset(0 0 100% 0); } 93%{ clip-path:inset(20% 0 50% 0); } 96%{ clip-path:inset(55% 0 18% 0); } }
+.mk-glitch .hero .tag{ font-size:14px; color:var(--cyan); margin:0 0 4px; text-shadow:0 0 7px rgba(5,217,232,.35); }
+.mk-glitch .hero .tag::before{ content:"// "; color:var(--mag); }
+.mk-glitch .hero .auth{ font-size:12px; color:var(--dim); margin:0; }
+.mk-glitch .hero .auth b{ color:var(--wht); font-weight:400; }
+
+.mk-glitch nav.term{ margin:18px 0 26px; font-size:14px; color:var(--grn); background:linear-gradient(180deg,rgba(57,255,20,.05),rgba(0,0,0,0)); border:1px solid rgba(57,255,20,.22); border-left:3px solid var(--grn); padding:10px 14px; }
+.mk-glitch nav.term .ps1{ color:var(--mag); margin-right:8px; }
+.mk-glitch nav.term a{ color:var(--cyan); text-decoration:none; margin-right:6px; }
+.mk-glitch nav.term a::before{ content:"> "; color:var(--dim); }
+.mk-glitch nav.term a:hover{ color:var(--cyan2); text-shadow:1px 0 var(--mag),-1px 0 var(--cyan); }
+.mk-glitch nav.term .cur{ display:inline-block; width:9px; height:1.05em; background:var(--grn); vertical-align:-2px; margin-left:2px; box-shadow:0 0 8px var(--grn); animation:mk-blink 1.05s steps(1) infinite; }
+@keyframes mk-blink{ 0%,49%{ opacity:1; } 50%,100%{ opacity:0; } }
+
+.mk-glitch .sectionlabel{ font-size:12px; color:var(--mag); letter-spacing:.18em; margin:0 0 14px; }
+.mk-glitch .sectionlabel::before{ content:"["; } .mk-glitch .sectionlabel::after{ content:"]"; }
+
+.mk-glitch .card{ position:relative; background:linear-gradient(180deg,rgba(255,32,121,.04),rgba(5,217,232,.03)); border:1px solid rgba(5,217,232,.32); padding:18px 20px 20px; margin-bottom:20px; clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,0 100%); transition:transform .12s,border-color .12s; }
+.mk-glitch .card::before{ content:""; position:absolute; left:-1px; top:-1px; right:-1px; bottom:-1px; border:1px solid rgba(255,32,121,.4); transform:translate(3px,3px); clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,0 100%); z-index:-1; pointer-events:none; }
+.mk-glitch .card:hover{ transform:translate(-1px,-1px); border-color:var(--cyan2); }
+.mk-glitch .card:hover h3 a{ text-shadow:2px 0 var(--mag),-2px 0 var(--cyan); }
+.mk-glitch .card .pmeta{ display:flex; gap:14px; flex-wrap:wrap; align-items:center; font-size:12px; margin-bottom:8px; }
+.mk-glitch .card .ts{ color:var(--grn); }
+.mk-glitch .card .ts::before{ content:"⌚ "; }
+.mk-glitch .card .cat{ color:var(--mag); text-shadow:0 0 6px rgba(255,32,121,.4); }
+.mk-glitch .card .cat::before{ content:"⟦"; } .mk-glitch .card .cat::after{ content:"⟧"; }
+.mk-glitch .card h3{ margin:2px 0 10px; font-family:var(--disp); font-weight:400; font-size:30px; line-height:1; }
+.mk-glitch .card h3 a{ color:var(--wht); text-decoration:none; transition:text-shadow .12s; }
+.mk-glitch .card h3 a:hover{ color:var(--cyan2); }
+.mk-glitch .card p.sum{ margin:0 0 12px; color:#d4d4ec; font-size:14px; line-height:1.6; }
+.mk-glitch .chips{ display:flex; gap:8px; flex-wrap:wrap; }
+.mk-glitch .chip{ font-size:11px; color:var(--cyan); border:1px solid rgba(5,217,232,.35); padding:2px 8px; background:rgba(5,217,232,.05); }
+.mk-glitch .chip::before{ content:"#"; color:var(--mag); }
+.mk-glitch .chip:hover{ border-color:var(--mag); color:var(--cyan2); }
+
+.mk-glitch footer.scr{ position:relative; z-index:4; margin-top:14px; border-top:1px dashed rgba(255,32,121,.3); padding:16px 0 26px; font-size:12px; color:var(--dim); display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+.mk-glitch footer.scr .glitchtxt{ color:var(--mag); }
+.mk-glitch footer.scr a{ color:var(--cyan); text-decoration:none; } .mk-glitch footer.scr a:hover{ color:var(--cyan2); text-shadow:1px 0 var(--mag); }
+.mk-glitch footer.scr .links{ display:flex; gap:14px; }
+
+.mk-glitch .art h1{ font-family:var(--disp); font-weight:400; font-size:46px; line-height:.98; margin:2px 0 12px; color:var(--wht); position:relative; text-shadow:2px 0 var(--mag),-2px 0 var(--cyan); animation:mk-glitch 6.5s steps(1) infinite; }
+.mk-glitch .am00{ font-size:12px; color:var(--cyan); margin:0 0 16px; }
+.mk-glitch .am00 b{ color:var(--mag); font-weight:400; } .mk-glitch .am00 .rd{ color:var(--grn); }
+.mk-glitch .am00 .t2{ color:var(--dim); }
+
+.mk-glitch .toc{ border:1px solid rgba(57,255,20,.28); background:rgba(57,255,20,.04); padding:14px 18px; margin:0 0 22px; max-width:340px; }
+.mk-glitch .toc .h{ font-size:12px; color:var(--mag); letter-spacing:.12em; margin:0 0 8px; }
+.mk-glitch .toc ol{ margin:0; padding:0; list-style:none; counter-reset:t; }
+.mk-glitch .toc li{ font-size:13px; color:var(--cyan); padding:2px 0; counter-increment:t; }
+.mk-glitch .toc li::before{ content:"0" counter(t) " ▸ "; color:var(--grn); }
+.mk-glitch .toc li:hover{ color:var(--cyan2); }
+
+.mk-glitch .lead{ font-size:15px; color:#e6e6ff; border-left:3px solid var(--cyan); padding-left:14px; margin:0 0 26px; line-height:1.7; }
+.mk-glitch .art h2{ font-family:var(--disp); font-weight:400; font-size:30px; line-height:1; margin:30px 0 12px; color:var(--cyan2); text-shadow:2px 0 var(--mag),-1px 0 var(--cyan); }
+.mk-glitch .art h2::before{ content:"## "; color:var(--mag); font-size:.7em; }
+.mk-glitch .art h3{ font-family:var(--mono); font-weight:400; font-size:18px; margin:22px 0 8px; color:var(--grn); text-shadow:0 0 8px rgba(57,255,20,.4); }
+.mk-glitch .art h3::before{ content:"### "; color:var(--mag); }
+.mk-glitch .art p{ margin:0 0 14px; color:#d8d8f0; font-size:14px; line-height:1.7; }
+.mk-glitch .art .ital{ color:var(--cyan); }
+.mk-glitch .art ul{ margin:0 0 18px; padding:0; list-style:none; }
+.mk-glitch .art ul li{ font-size:14px; color:#d8d8f0; padding:3px 0 3px 22px; position:relative; }
+.mk-glitch .art ul li::before{ content:"▚"; position:absolute; left:0; color:var(--mag); }
+.mk-glitch .art ul li b{ color:var(--cyan2); font-weight:400; }
+
+.mk-glitch .term-win{ border:1px solid rgba(5,217,232,.4); background:#06060f; margin:0 0 22px; box-shadow:0 0 22px rgba(5,217,232,.12); }
+.mk-glitch .term-win .twbar{ display:flex; align-items:center; gap:8px; padding:7px 12px; border-bottom:1px solid rgba(5,217,232,.25); background:linear-gradient(180deg,rgba(255,32,121,.08),rgba(0,0,0,0)); font-size:11px; color:var(--dim); }
+.mk-glitch .term-win .twbar i{ width:9px; height:9px; border-radius:50%; display:block; }
+.mk-glitch .term-win .twbar .r{ background:var(--mag); box-shadow:0 0 6px var(--mag); } .mk-glitch .term-win .twbar .y{ background:#f5d90a; } .mk-glitch .term-win .twbar .g{ background:var(--grn); box-shadow:0 0 6px var(--grn); }
+.mk-glitch .term-win .twbar .fn{ margin-left:6px; color:var(--cyan); }
+.mk-glitch .term-win pre{ margin:0; padding:14px 16px; overflow-x:auto; font-family:var(--mono); font-size:13px; line-height:1.7; }
+.mk-glitch .term-win pre .ln{ display:block; white-space:pre; }
+.mk-glitch .k{ color:var(--mag); } .mk-glitch .cls{ color:var(--cyan2); } .mk-glitch .fn2{ color:var(--grn); } .mk-glitch .str{ color:#ffd166; } .mk-glitch .var{ color:var(--wht); } .mk-glitch .cmt{ color:var(--dim); font-style:italic; } .mk-glitch .pn{ color:var(--cyan); }
+
+.mk-glitch blockquote.pull{ position:relative; margin:0 0 24px; padding:18px 22px; border:1px solid rgba(255,32,121,.4); border-left:4px solid var(--mag); background:linear-gradient(180deg,rgba(255,32,121,.07),rgba(0,0,0,0)); font-family:var(--disp); font-size:26px; line-height:1.05; color:var(--wht); text-shadow:1px 0 var(--mag),-1px 0 var(--cyan); }
+.mk-glitch blockquote.pull::before{ content:"❝"; color:var(--cyan); position:absolute; top:6px; right:14px; font-size:30px; opacity:.4; }
+
+.mk-glitch table.gx{ width:100%; border-collapse:collapse; margin:6px 0 24px; font-size:13px; }
+.mk-glitch table.gx th{ text-align:left; padding:8px 12px; border:1px solid rgba(5,217,232,.4); background:linear-gradient(180deg,rgba(5,217,232,.12),rgba(255,32,121,.05)); color:var(--cyan2); font-weight:400; letter-spacing:.05em; text-shadow:0 0 6px rgba(5,217,232,.4); }
+.mk-glitch table.gx td{ padding:8px 12px; border:1px solid rgba(5,217,232,.22); color:#d8d8f0; }
+.mk-glitch table.gx td:first-child{ color:var(--mag); text-shadow:0 0 6px rgba(255,32,121,.3); }
+.mk-glitch table.gx tr:hover td{ background:rgba(5,217,232,.05); }
+
+.mk-glitch .redact{ background:var(--wht); color:var(--wht); padding:0 4px; }
+</style>
+
+<div class="mk-root mk-glitch">
+  <div class="frame">
+    <div class="bar">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <div class="url"><span>xlyk.github.io</span></div>
+      <div class="seg"><button data-view="home" data-active>Home</button><button data-view="article">Article</button></div>
+    </div>
+    <div class="screen">
+      <div class="noise"></div>
+
+      <div class="view view-home">
+        <div class="topbar">
+          <span class="hex">0x4B59 // 01001011</span>
+          <span class="sig">▓ SIGNAL_LOST :: reacquiring…</span>
+          <span class="ok">● CRT_LINK OK</span>
+        </div>
+
+        <div class="hero">
+          <h1 data-txt="KYLE'S_BLOG">KYLE'S_BLOG</h1>
+          <p class="tag">Notes on AI engineering, code, and the tools in between.</p>
+          <p class="auth">authored_by <b>Kyle Hanks</b> &nbsp;|&nbsp; uplink stable<span style="color:var(--grn)">_</span></p>
+        </div>
+
+        <nav class="term">
+          <span class="ps1">guest@xlyk:~$</span><a href="#">home</a><a href="#">archive</a><a href="#">categories</a><a href="#">search</a><span class="cur"></span>
+        </nav>
+
+        <p class="sectionlabel">LATEST_TRANSMISSIONS — 2 records</p>
+
+        <article class="card">
+          <div class="pmeta">
+            <span class="ts">Sep 20, 2025</span>
+            <span class="cat">AI Engineering</span>
+          </div>
+          <h3><a href="#">Mastering Prompt Chaining with DSPy: A Structured Guide</a></h3>
+          <p class="sum">Moving beyond single-shot prompts: build and optimize prompt-chained LLM pipelines in DSPy — Signatures, Modules, Optimizers, and compilation, with practical Python examples.</p>
+          <div class="chips"><span class="chip">dspy</span><span class="chip">prompt chaining</span><span class="chip">llm</span><span class="chip">optimization</span><span class="chip">python</span></div>
+        </article>
+
+        <article class="card">
+          <div class="pmeta">
+            <span class="ts">Sep 20, 2025</span>
+            <span class="cat">General</span>
+          </div>
+          <h3><a href="#">Hello World</a></h3>
+          <p class="sum">First post on my Pelican-powered blog.</p>
+          <div class="chips"><span class="chip">intro</span><span class="chip">pelican</span></div>
+        </article>
+
+        <footer class="scr">
+          <span><span class="glitchtxt">©</span> 2026 Kyle Hanks — built with Pelican</span>
+          <span class="links"><a href="#">RSS</a><a href="#">GitHub</a></span>
+        </footer>
+      </div>
+
+      <div class="view view-article" style="display:none">
+        <div class="topbar">
+          <span class="hex">0xDEAD // doc.read</span>
+          <span class="sig">▓ DECODING_STREAM</span>
+          <span class="ok">● BUFFER OK</span>
+        </div>
+
+        <nav class="term">
+          <span class="ps1">guest@xlyk:~$</span><a href="#">home</a><a href="#">archive</a><a href="#">categories</a><a href="#">search</a><span class="cur"></span>
+        </nav>
+
+        <div class="art">
+          <h1 data-txt="DSPy_CHAIN">Mastering Prompt Chaining with DSPy: A Structured Guide</h1>
+          <p class="am00"><b>Sep 20, 2025</b> <span class="t2">·</span> AI Engineering <span class="t2">·</span> <span class="rd">9 min read</span> <span class="t2">·</span> tags: dspy, prompt chaining, llm, optimization, python</p>
+
+          <div class="toc">
+            <p class="h">TABLE_OF_CONTENTS</p>
+            <ol>
+              <li>Introduction</li>
+              <li>DSPy Core Concepts</li>
+              <li>Signatures</li>
+              <li>Modules</li>
+              <li>Optimizers</li>
+            </ol>
+          </div>
+
+          <p class="lead">Moving beyond simple, single-shot prompts is crucial for building sophisticated applications. DSPy, a framework from Stanford, replaces brittle manual prompt engineering with a systematic, programmatic approach — you define the logic and structure of a pipeline, and DSPy's optimizers find the most effective prompts.</p>
+
+          <h2>Introduction: Beyond Manual Prompting</h2>
+          <p>DSPy shifts development away from endless prompt tweaking toward a modular approach. Instead of fiddling with phrasing, you declare the inputs and outputs of each step and let the compiler optimize the prompts for a metric.</p>
+
+          <h2>DSPy Core Concepts</h2>
+          <p>The power of DSPy lies in a few components that compose into optimizable pipelines.</p>
+
+          <h3>1. Signatures: Defining the I/O</h3>
+          <p>A Signature is a declarative spec of a task's inputs and outputs. It separates the <span class="ital">what</span> from the <span class="ital">how</span>.</p>
+
+          <ul>
+            <li><b>Inputs</b> — what the module needs (e.g. question, context)</li>
+            <li><b>Outputs</b> — what it should produce (e.g. answer)</li>
+          </ul>
+
+          <div class="term-win">
+            <div class="twbar"><i class="r"></i><i class="y"></i><i class="g"></i><span class="fn">signature.py — █</span></div>
+            <pre><span class="ln"><span class="k">class</span> <span class="cls">BasicQA</span>(<span class="cls">dspy.Signature</span>):</span><span class="ln">    <span class="str">"""Answer questions with short factoid answers."""</span></span><span class="ln">    <span class="var">question</span> = <span class="pn">dspy</span>.<span class="fn2">InputField</span>(<span class="var">desc</span>=<span class="str">"The question to answer"</span>)</span><span class="ln">    <span class="var">answer</span> = <span class="pn">dspy</span>.<span class="fn2">OutputField</span>(<span class="var">desc</span>=<span class="str">"Often one word or a short phrase"</span>)</span></pre>
+          </div>
+
+          <blockquote class="pull">Don't tune prompts by hand. Define the pipeline, then compile it against a metric.</blockquote>
+
+          <h3>2. Modules: The Building Blocks</h3>
+          <p>Modules wrap Signatures with a prompting strategy — Predict, ChainOfThought, ReAct — and can be composed into larger programs.</p>
+
+          <table class="gx">
+            <thead><tr><th>Component</th><th>Role</th></tr></thead>
+            <tbody>
+              <tr><td>Signature</td><td>Declares inputs &amp; outputs</td></tr>
+              <tr><td>Module</td><td>Building block with a strategy</td></tr>
+              <tr><td>Optimizer</td><td>Tunes prompts against a metric</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <footer class="scr">
+          <span><span class="glitchtxt">©</span> 2026 Kyle Hanks — built with Pelican</span>
+          <span class="links"><a href="#">RSS</a><a href="#">GitHub</a></span>
+        </footer>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>(function(){var r=document.querySelector('.mk-glitch');if(!r)return;var bs=r.querySelectorAll('[data-view]');var vs=r.querySelectorAll('.view');bs.forEach(function(b){b.addEventListener('click',function(){var v=b.getAttribute('data-view');vs.forEach(function(e){e.style.display=e.classList.contains('view-'+v)?'':'none';});bs.forEach(function(x){x.removeAttribute('data-active');});b.setAttribute('data-active','');});});})();</script></div></body></html>

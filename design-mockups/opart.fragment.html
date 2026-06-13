@@ -1,0 +1,331 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap');
+
+.mk-opart{ --ink:#000; --paper:#fff; --acc:#ff1f1f;
+  --body:'Space Grotesk',system-ui,sans-serif; --disp:'Anton',Impact,sans-serif; --mono:'Space Mono',ui-monospace,monospace; }
+.mk-opart *{ box-sizing:border-box; }
+.mk-opart .frame{ background:var(--color-background-secondary); border:1px solid var(--color-border-tertiary); border-radius:12px; overflow:hidden; max-width:980px; margin:0 auto; }
+.mk-opart .bar{ display:flex; align-items:center; gap:10px; padding:9px 14px; border-bottom:1px solid var(--color-border-tertiary); background:var(--color-background-secondary); }
+.mk-opart .bar .dots{ display:flex; gap:6px; }
+.mk-opart .bar .dots i{ width:11px; height:11px; border-radius:50%; background:var(--color-border-tertiary); display:block; }
+.mk-opart .bar .url{ flex:1; max-width:300px; margin:0 auto; text-align:center; font:12px/1 var(--body); color:var(--color-text-primary); background:var(--color-background-primary); border:1px solid var(--color-border-tertiary); border-radius:999px; padding:6px 14px; opacity:.85; }
+.mk-opart .seg{ display:flex; border:1px solid var(--color-border-tertiary); border-radius:8px; overflow:hidden; }
+.mk-opart .seg button{ font:12px/1 var(--body); padding:6px 12px; border:0; background:transparent; color:var(--color-text-primary); cursor:pointer; }
+.mk-opart .seg button[data-active]{ background:var(--color-text-primary); color:var(--color-background-primary); }
+
+.mk-opart .screen{ min-height:620px; background:var(--paper); color:var(--ink); font-family:var(--body); position:relative; overflow:hidden; }
+
+@keyframes mk-drift{ to{ background-position:120px 0, -120px 0; } }
+@keyframes mk-breathe{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.14); } }
+@keyframes mk-slide{ to{ background-position:64px 0; } }
+
+.mk-opart .stripes{ background:
+  repeating-linear-gradient(90deg, var(--ink) 0 9px, var(--paper) 9px 18px);
+  background-size:120px 100%, 120px 100%; }
+
+/* ===== HERO ===== */
+.mk-opart .hero{ position:relative; background:var(--ink); color:var(--paper); padding:0; overflow:hidden; border-bottom:8px solid var(--acc); }
+.mk-opart .hero .wave{ position:absolute; inset:-40% -10%; opacity:.9;
+  background:repeating-linear-gradient(90deg, var(--paper) 0 7px, var(--ink) 7px 16px);
+  transform:skewY(-9deg) scaleY(1.4);
+  -webkit-mask:radial-gradient(120% 90% at 50% 50%, #000 38%, transparent 74%);
+          mask:radial-gradient(120% 90% at 50% 50%, #000 38%, transparent 74%);
+  animation:mk-slide 6s linear infinite; }
+.mk-opart .hero .target{ position:absolute; top:50%; right:34px; width:150px; height:150px; transform:translateY(-50%);
+  border-radius:50%;
+  background:repeating-radial-gradient(circle at 50% 50%, var(--ink) 0 6px, var(--paper) 6px 12px);
+  animation:mk-breathe 7s ease-in-out infinite; }
+.mk-opart .hero .target::after{ content:''; position:absolute; inset:42%; border-radius:50%; background:var(--acc); }
+.mk-opart .topnav{ position:relative; z-index:3; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 26px; }
+.mk-opart .brand-mini{ font-family:var(--disp); letter-spacing:.06em; font-size:17px; text-transform:uppercase; background:var(--paper); color:var(--ink); padding:5px 11px; }
+.mk-opart .topnav nav{ display:flex; gap:6px; flex-wrap:wrap; }
+.mk-opart .topnav nav a{ font-family:var(--body); font-weight:700; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--paper); text-decoration:none; padding:6px 11px; border:1px solid var(--paper); transition:.18s; }
+.mk-opart .topnav nav a:hover{ background:var(--paper); color:var(--ink); }
+.mk-opart .topnav nav a.on{ background:var(--acc); border-color:var(--acc); color:var(--paper); }
+.mk-opart .herobody{ position:relative; z-index:3; padding:30px 26px 46px; max-width:760px; }
+.mk-opart .hero h1{ font-family:var(--disp); font-weight:400; text-transform:uppercase; letter-spacing:-.01em; line-height:.86; margin:0; font-size:78px;
+  text-shadow:5px 5px 0 var(--acc); }
+.mk-opart .hero .tag{ margin:20px 0 0; font-size:16px; max-width:520px; line-height:1.45; font-weight:500;
+  background:var(--paper); color:var(--ink); display:inline-block; padding:9px 14px; }
+
+/* ===== SECTION SHELL ===== */
+.mk-opart .wrap{ padding:34px 26px 0; }
+.mk-opart .divider{ height:34px; margin:0; background:
+  repeating-linear-gradient(90deg, var(--ink) 0 11px, var(--paper) 11px 22px);
+  background-size:120px 100%; transform:skewX(-12deg) scaleX(1.2);
+  animation:mk-slide 5s linear infinite; }
+.mk-opart .sectlabel{ font-family:var(--disp); text-transform:uppercase; font-weight:400; font-size:13px; letter-spacing:.22em;
+  display:inline-block; background:var(--ink); color:var(--paper); padding:5px 12px; margin:0 0 18px; }
+.mk-opart .sectlabel.acc{ background:var(--acc); }
+
+/* ===== POST CARDS ===== */
+.mk-opart .cards{ display:grid; gap:20px; padding-bottom:36px; }
+.mk-opart .card{ position:relative; background:var(--paper); color:var(--ink); border:3px solid var(--ink); overflow:hidden; transition:.2s; }
+.mk-opart .card .moire{ position:absolute; top:-30px; right:-30px; width:118px; height:118px; border-radius:50%;
+  background:repeating-radial-gradient(circle at 50% 50%, var(--ink) 0 4px, var(--paper) 4px 8px);
+  transition:.3s; pointer-events:none; }
+.mk-opart .card-in{ position:relative; z-index:2; padding:22px 24px; }
+.mk-opart .card .ptitle{ font-family:var(--disp); font-weight:400; text-transform:uppercase; line-height:.92; font-size:31px; letter-spacing:-.005em; margin:0 0 12px; max-width:74%; }
+.mk-opart .card .ptitle a{ color:inherit; text-decoration:none; }
+.mk-opart .card .ptitle a:hover{ color:var(--acc); }
+.mk-opart .meta{ display:flex; align-items:center; flex-wrap:wrap; gap:9px; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; margin:0 0 13px; }
+.mk-opart .meta .date{ background:var(--ink); color:var(--paper); padding:3px 8px; }
+.mk-opart .meta .cat{ background:var(--acc); color:var(--paper); padding:3px 8px; }
+.mk-opart .chips{ display:flex; flex-wrap:wrap; gap:6px; margin:0 0 13px; }
+.mk-opart .chip{ font-size:11px; font-weight:700; letter-spacing:.05em; border:1.5px solid var(--ink); padding:3px 8px; text-transform:lowercase; }
+.mk-opart .summary{ font-size:14.5px; line-height:1.55; max-width:80%; margin:0; }
+.mk-opart .readmore{ display:inline-block; margin-top:16px; font-family:var(--disp); text-transform:uppercase; font-size:13px; letter-spacing:.12em; background:var(--ink); color:var(--paper); padding:7px 14px; cursor:pointer; }
+.mk-opart .readmore:hover{ background:var(--acc); }
+/* hover inversion */
+.mk-opart .card:hover{ background:var(--ink); color:var(--paper); }
+.mk-opart .card:hover .chip{ border-color:var(--paper); color:var(--paper); }
+.mk-opart .card:hover .meta .date{ background:var(--paper); color:var(--ink); }
+.mk-opart .card:hover .moire{ background:repeating-radial-gradient(circle at 50% 50%, var(--paper) 0 4px, var(--ink) 4px 8px); transform:scale(1.18) rotate(8deg); }
+.mk-opart .card:hover .readmore{ background:var(--acc); color:var(--paper); }
+.mk-opart .card:hover .ptitle a:hover{ color:var(--acc); }
+
+/* ===== FOOTER ===== */
+.mk-opart footer.foot{ position:relative; margin-top:30px; background:var(--ink); color:var(--paper); padding:26px; border-top:8px solid var(--acc); overflow:hidden; }
+.mk-opart footer.foot .check{ position:absolute; inset:0; opacity:.18; pointer-events:none;
+  background:repeating-conic-gradient(var(--paper) 0 25%, var(--ink) 0 50%); background-size:26px 26px;
+  transform:skewX(-14deg) scale(1.3); }
+.mk-opart footer.foot .frow{ position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; }
+.mk-opart footer.foot .fc{ font-size:12px; font-weight:500; letter-spacing:.04em; }
+.mk-opart footer.foot .flinks{ display:flex; gap:8px; }
+.mk-opart footer.foot .flinks a{ font-family:var(--body); font-weight:700; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink); background:var(--paper); padding:5px 11px; text-decoration:none; transition:.18s; }
+.mk-opart footer.foot .flinks a:hover{ background:var(--acc); color:var(--paper); }
+
+/* ===== ARTICLE ===== */
+.mk-opart .ahead{ position:relative; background:var(--ink); color:var(--paper); padding:0 0 30px; overflow:hidden; border-bottom:8px solid var(--acc); }
+.mk-opart .ahead .wave{ position:absolute; inset:-30% -10%; opacity:.55;
+  background:repeating-linear-gradient(80deg, var(--paper) 0 6px, var(--ink) 6px 14px);
+  transform:skewY(7deg) scaleY(1.3);
+  -webkit-mask:radial-gradient(120% 120% at 80% 0%, #000 30%, transparent 72%);
+          mask:radial-gradient(120% 120% at 80% 0%, #000 30%, transparent 72%);
+  animation:mk-slide 7s linear infinite; }
+.mk-opart .ahead .topnav{ padding:14px 26px; }
+.mk-opart .ahead-in{ position:relative; z-index:3; padding:14px 26px 0; }
+.mk-opart .ahead h1{ font-family:var(--disp); font-weight:400; text-transform:uppercase; line-height:.9; font-size:52px; letter-spacing:-.01em; margin:8px 0 0; max-width:820px;
+  text-shadow:4px 4px 0 var(--acc); }
+.mk-opart .ameta{ display:flex; flex-wrap:wrap; gap:8px; margin:20px 0 0; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
+.mk-opart .ameta span{ border:1px solid var(--paper); padding:3px 8px; }
+.mk-opart .ameta span.k{ background:var(--acc); border-color:var(--acc); }
+.mk-opart .ameta span.d{ background:var(--paper); color:var(--ink); border-color:var(--paper); }
+
+.mk-opart .abody{ position:relative; padding:34px 26px 0; }
+/* solid figure-ground reading panel */
+.mk-opart .panel{ background:var(--paper); color:var(--ink); border:3px solid var(--ink); padding:30px 32px; max-width:780px; margin:0 auto; }
+.mk-opart .toc{ background:var(--ink); color:var(--paper); border:3px solid var(--ink); padding:18px 22px; max-width:780px; margin:0 auto 26px; }
+.mk-opart .toc .tl{ font-family:var(--disp); text-transform:uppercase; font-size:15px; letter-spacing:.14em; margin:0 0 12px; }
+.mk-opart .toc ol{ margin:0; padding:0; list-style:none; counter-reset:t; display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:8px; }
+.mk-opart .toc li{ counter-increment:t; font-size:13px; font-weight:500; display:flex; align-items:baseline; gap:9px; }
+.mk-opart .toc li::before{ content:counter(t,decimal-leading-zero); font-family:var(--mono); font-weight:700; color:var(--acc); font-size:12px; }
+.mk-opart .lead{ font-size:17px; line-height:1.55; font-weight:500; margin:0 0 4px; border-left:6px solid var(--acc); padding-left:16px; }
+.mk-opart .panel h2{ font-family:var(--disp); font-weight:400; text-transform:uppercase; line-height:.95; font-size:30px; letter-spacing:-.005em; margin:34px 0 12px; padding-bottom:8px; border-bottom:4px solid var(--ink); }
+.mk-opart .panel h3{ font-family:var(--disp); font-weight:400; text-transform:uppercase; font-size:20px; letter-spacing:.01em; margin:26px 0 10px;
+  background:var(--ink); color:var(--paper); display:inline-block; padding:5px 12px; }
+.mk-opart .panel p{ font-size:15.5px; line-height:1.66; margin:0 0 15px; }
+.mk-opart .panel ul{ margin:0 0 18px; padding:0; list-style:none; }
+.mk-opart .panel ul li{ font-size:15px; line-height:1.5; padding:8px 0 8px 30px; position:relative; border-bottom:1.5px solid var(--ink); }
+.mk-opart .panel ul li::before{ content:''; position:absolute; left:2px; top:13px; width:13px; height:13px; border-radius:50%;
+  background:repeating-radial-gradient(circle at 50% 50%, var(--ink) 0 2px, var(--paper) 2px 4px); }
+.mk-opart .panel ul li b{ font-weight:700; }
+
+/* code block: monochrome on solid black, striped optical border */
+.mk-opart .codewrap{ margin:8px 0 22px; padding:6px;
+  background:repeating-linear-gradient(45deg, var(--ink) 0 6px, var(--paper) 6px 12px); }
+.mk-opart pre.code{ margin:0; background:var(--ink); color:var(--paper); padding:18px 20px; overflow-x:auto;
+  font-family:var(--mono); font-size:13px; line-height:1.7; }
+.mk-opart pre.code .kw{ color:var(--acc); font-weight:700; }
+.mk-opart pre.code .cls{ color:var(--paper); font-weight:700; text-decoration:underline; text-decoration-color:var(--acc); text-underline-offset:3px; }
+.mk-opart pre.code .doc{ color:#bdbdbd; font-style:italic; }
+.mk-opart pre.code .str{ color:#fff; background:rgba(255,31,31,.22); }
+.mk-opart pre.code .fn{ color:#fff; font-weight:700; }
+
+.mk-opart blockquote.pull{ margin:6px 0 24px; background:var(--acc); color:var(--paper); border:3px solid var(--ink);
+  padding:22px 26px; font-family:var(--disp); font-weight:400; text-transform:uppercase; line-height:1.02; font-size:25px; letter-spacing:.005em; position:relative; }
+.mk-opart blockquote.pull::before{ content:'\201C'; position:absolute; top:-6px; left:10px; font-size:60px; opacity:.4; font-family:var(--disp); }
+
+.mk-opart table.opt{ width:100%; border-collapse:collapse; margin:6px 0 8px; border:3px solid var(--ink); }
+.mk-opart table.opt th{ background:var(--ink); color:var(--paper); font-family:var(--disp); text-transform:uppercase; font-weight:400; letter-spacing:.1em; font-size:13px; text-align:left; padding:11px 14px; }
+.mk-opart table.opt th:first-child{ background:var(--acc); }
+.mk-opart table.opt td{ font-size:14px; font-weight:500; padding:11px 14px; border-top:2px solid var(--ink); }
+.mk-opart table.opt td:first-child{ font-weight:700; border-right:2px solid var(--ink); width:34%; text-transform:lowercase; font-family:var(--mono); }
+.mk-opart table.opt tr:nth-child(even) td{ background:#f0f0f0; }
+
+@media (max-width:620px){
+  .mk-opart .hero h1{ font-size:52px; }
+  .mk-opart .ahead h1{ font-size:38px; }
+  .mk-opart .hero .target{ display:none; }
+  .mk-opart .card .ptitle, .mk-opart .summary{ max-width:100%; }
+}
+</style>
+
+<div class="mk-root mk-opart">
+  <div class="frame">
+    <div class="bar">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <div class="url">xlyk.github.io</div>
+      <div class="seg">
+        <button data-view="home" data-active>Home</button><button data-view="article">Article</button>
+      </div>
+    </div>
+    <div class="screen">
+
+      <div class="view view-home">
+        <header class="hero">
+          <div class="wave" aria-hidden="true"></div>
+          <div class="target" aria-hidden="true"></div>
+          <div class="topnav">
+            <span class="brand-mini">Kyle&rsquo;s blog</span>
+            <nav>
+              <a href="#" class="on">Home</a>
+              <a href="#">Archive</a>
+              <a href="#">Categories</a>
+              <a href="#">Search</a>
+            </nav>
+          </div>
+          <div class="herobody">
+            <h1>Kyle&rsquo;s<br>blog</h1>
+            <p class="tag">Notes on AI engineering, code, and the tools in between.</p>
+          </div>
+        </header>
+
+        <div class="divider" aria-hidden="true"></div>
+
+        <div class="wrap">
+          <span class="sectlabel acc">Latest writing</span>
+          <div class="cards">
+
+            <article class="card">
+              <div class="moire" aria-hidden="true"></div>
+              <div class="card-in">
+                <div class="meta">
+                  <span class="date">Sep 20, 2025</span>
+                  <span class="cat">AI Engineering</span>
+                </div>
+                <h2 class="ptitle"><a href="#" data-goto="article">Mastering Prompt Chaining with DSPy: A Structured Guide</a></h2>
+                <div class="chips">
+                  <span class="chip">dspy</span><span class="chip">prompt chaining</span><span class="chip">llm</span><span class="chip">optimization</span><span class="chip">python</span>
+                </div>
+                <p class="summary">Moving beyond single-shot prompts: build and optimize prompt-chained LLM pipelines in DSPy &mdash; Signatures, Modules, Optimizers, and compilation, with practical Python examples.</p>
+                <span class="readmore" data-goto="article">Read &rarr;</span>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="moire" aria-hidden="true"></div>
+              <div class="card-in">
+                <div class="meta">
+                  <span class="date">Sep 20, 2025</span>
+                  <span class="cat">General</span>
+                </div>
+                <h2 class="ptitle"><a href="#">Hello World</a></h2>
+                <div class="chips">
+                  <span class="chip">intro</span><span class="chip">pelican</span>
+                </div>
+                <p class="summary">First post on my Pelican-powered blog.</p>
+                <span class="readmore">Read &rarr;</span>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <footer class="foot">
+          <div class="check" aria-hidden="true"></div>
+          <div class="frow">
+            <span class="fc">&copy; 2026 Kyle Hanks &mdash; built with Pelican</span>
+            <span class="flinks"><a href="#">RSS</a><a href="#">GitHub</a></span>
+          </div>
+        </footer>
+      </div>
+
+      <div class="view view-article" style="display:none">
+        <header class="ahead">
+          <div class="wave" aria-hidden="true"></div>
+          <div class="topnav">
+            <span class="brand-mini">Kyle&rsquo;s blog</span>
+            <nav>
+              <a href="#" data-goto="home">Home</a>
+              <a href="#">Archive</a>
+              <a href="#">Categories</a>
+              <a href="#">Search</a>
+            </nav>
+          </div>
+          <div class="ahead-in">
+            <h1>Mastering Prompt Chaining with DSPy</h1>
+            <div class="ameta">
+              <span class="d">Sep 20, 2025</span>
+              <span class="k">AI Engineering</span>
+              <span>9 min read</span>
+              <span>dspy</span><span>prompt chaining</span><span>llm</span><span>optimization</span><span>python</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="abody">
+          <div class="toc">
+            <p class="tl">Table of contents</p>
+            <ol>
+              <li>Introduction</li>
+              <li>DSPy Core Concepts</li>
+              <li>Signatures</li>
+              <li>Modules</li>
+              <li>Optimizers</li>
+            </ol>
+          </div>
+
+          <div class="panel">
+            <p class="lead">Moving beyond simple, single-shot prompts is crucial for building sophisticated applications. DSPy, a framework from Stanford, replaces brittle manual prompt engineering with a systematic, programmatic approach &mdash; you define the logic and structure of a pipeline, and DSPy&rsquo;s optimizers find the most effective prompts.</p>
+
+            <h2>Introduction: Beyond Manual Prompting</h2>
+            <p>DSPy shifts development away from endless prompt tweaking toward a modular approach. Instead of fiddling with phrasing, you declare the inputs and outputs of each step and let the compiler optimize the prompts for a metric.</p>
+
+            <h2>DSPy Core Concepts</h2>
+            <p>The power of DSPy lies in a few components that compose into optimizable pipelines.</p>
+
+            <h3>1. Signatures: Defining the I/O</h3>
+            <p>A Signature is a declarative spec of a task&rsquo;s inputs and outputs. It separates the what from the how.</p>
+            <ul>
+              <li><b>Inputs</b> &mdash; what the module needs (e.g. question, context)</li>
+              <li><b>Outputs</b> &mdash; what it should produce (e.g. answer)</li>
+            </ul>
+
+            <div class="codewrap">
+<pre class="code"><span class="kw">class</span> <span class="cls">BasicQA</span>(dspy.Signature):
+    <span class="doc">"""Answer questions with short factoid answers."""</span>
+    question = dspy.<span class="fn">InputField</span>(desc=<span class="str">"The question to answer"</span>)
+    answer = dspy.<span class="fn">OutputField</span>(desc=<span class="str">"Often one word or a short phrase"</span>)</pre>
+            </div>
+
+            <blockquote class="pull">Don&rsquo;t tune prompts by hand. Define the pipeline, then compile it against a metric.</blockquote>
+
+            <h3>2. Modules: The Building Blocks</h3>
+            <p>Modules wrap Signatures with a prompting strategy &mdash; Predict, ChainOfThought, ReAct &mdash; and can be composed into larger programs.</p>
+
+            <table class="opt">
+              <thead><tr><th>Component</th><th>Role</th></tr></thead>
+              <tbody>
+                <tr><td>Signature</td><td>Declares inputs &amp; outputs</td></tr>
+                <tr><td>Module</td><td>Building block with a strategy</td></tr>
+                <tr><td>Optimizer</td><td>Tunes prompts against a metric</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <footer class="foot">
+          <div class="check" aria-hidden="true"></div>
+          <div class="frow">
+            <span class="fc">&copy; 2026 Kyle Hanks &mdash; built with Pelican</span>
+            <span class="flinks"><a href="#">RSS</a><a href="#">GitHub</a></span>
+          </div>
+        </footer>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>(function(){var r=document.querySelector('.mk-opart');if(!r)return;var bs=r.querySelectorAll('[data-view]');var vs=r.querySelectorAll('.view');function show(v){vs.forEach(function(e){e.style.display=e.classList.contains('view-'+v)?'':'none';});bs.forEach(function(x){x.removeAttribute('data-active');});bs.forEach(function(x){if(x.getAttribute('data-view')===v)x.setAttribute('data-active','');});}bs.forEach(function(b){b.addEventListener('click',function(){show(b.getAttribute('data-view'));});});r.querySelectorAll('[data-goto]').forEach(function(g){g.addEventListener('click',function(e){e.preventDefault();show(g.getAttribute('data-goto'));r.querySelector('.screen').scrollIntoView({block:'nearest'});});});})();</script>

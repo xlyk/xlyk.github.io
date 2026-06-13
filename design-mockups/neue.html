@@ -1,0 +1,295 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Die Neue Typographie — Kyle's blog mockup</title><style>html,body{margin:0;background:#11151c;font-family:system-ui}.page{max-width:980px;margin:24px auto;padding:0 16px}</style></head><body><div class=page><style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;900&family=Archivo+Narrow:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+.mk-neue *{box-sizing:border-box;margin:0;padding:0}
+.mk-neue{font-family:'Archivo','Helvetica Neue',Arial,sans-serif}
+.mk-neue .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+
+.mk-neue .frame{border:1px solid var(--color-border-tertiary);border-radius:12px;overflow:hidden;background:var(--color-background-secondary)}
+.mk-neue .bar{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--color-background-secondary);border-bottom:1px solid var(--color-border-tertiary)}
+.mk-neue .bar .dots{display:flex;gap:7px}
+.mk-neue .bar .dots i{width:11px;height:11px;border-radius:50%;background:var(--color-border-tertiary);display:block}
+.mk-neue .bar .url{flex:1;text-align:center;font-family:var(--font-sans);font-size:12px;color:var(--color-text-primary);opacity:.7;background:var(--color-background-primary);border:1px solid var(--color-border-tertiary);border-radius:7px;padding:5px 0;max-width:260px;margin:0 auto}
+.mk-neue .seg{display:flex;border:1px solid var(--color-border-tertiary);border-radius:7px;overflow:hidden}
+.mk-neue .seg button{font-family:var(--font-sans);font-size:12px;padding:5px 13px;border:0;background:transparent;color:var(--color-text-primary);cursor:pointer;opacity:.65}
+.mk-neue .seg button+button{border-left:1px solid var(--color-border-tertiary)}
+.mk-neue .seg button[data-active]{background:var(--color-text-primary);color:var(--color-background-primary);opacity:1}
+
+.mk-neue .screen{min-height:620px;background:#f4f2ed;color:#0a0a0a;position:relative;overflow:hidden}
+.mk-neue .red{color:#e3000f}
+.mk-neue .bg-red{background:#e3000f}
+.mk-neue .bg-blk{background:#0a0a0a}
+
+.mk-neue .wrap{padding:0 46px 46px}
+
+.mk-neue .hero{position:relative;padding:40px 46px 26px;border-bottom:6px solid #0a0a0a}
+.mk-neue .toprule{display:flex;justify-content:space-between;align-items:flex-start;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;padding-bottom:18px}
+.mk-neue .toprule .est{color:#e3000f}
+.mk-neue .masthead{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end}
+.mk-neue .sitetitle{font-weight:900;letter-spacing:-.04em;line-height:.82;font-size:88px;text-transform:uppercase}
+.mk-neue .sitetitle .blog{display:inline-block;background:#e3000f;color:#fff;padding:0 10px;animation:wipe .7s cubic-bezier(.7,0,.2,1) both}
+@keyframes wipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+.mk-neue .tagblock{text-align:right;max-width:230px;padding-bottom:8px}
+.mk-neue .tagline{font-family:'Archivo Narrow',sans-serif;font-size:15px;line-height:1.3;font-weight:500;text-align:left}
+.mk-neue .tagline:before{content:"";display:block;width:46px;height:5px;background:#0a0a0a;margin-bottom:9px}
+.mk-neue .author{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;margin-top:11px;text-align:left}
+
+.mk-neue .nav{display:flex;align-items:stretch;border-top:2px solid #0a0a0a;margin-top:26px}
+.mk-neue .nav a{flex:1;font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;padding:13px 0;text-decoration:none;color:#0a0a0a;position:relative;display:flex;align-items:center;gap:9px;transition:color .18s}
+.mk-neue .nav a+a{border-left:2px solid #0a0a0a}
+.mk-neue .nav a .n{font-family:'Space Mono',monospace;font-size:11px;color:#e3000f;font-weight:700}
+.mk-neue .nav a:after{content:"";position:absolute;left:0;bottom:0;height:5px;width:0;background:#e3000f;transition:width .22s cubic-bezier(.7,0,.2,1)}
+.mk-neue .nav a:hover{color:#e3000f}
+.mk-neue .nav a:hover:after{width:100%}
+
+.mk-neue .seclabel{display:flex;align-items:baseline;gap:16px;padding:34px 0 8px}
+.mk-neue .seclabel .big{font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.2em;text-transform:uppercase;font-weight:700}
+.mk-neue .seclabel .rule{flex:1;height:2px;background:#0a0a0a}
+.mk-neue .seclabel .count{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;opacity:.55}
+
+.mk-neue .post{display:grid;grid-template-columns:86px 1fr;gap:28px;padding:30px 0;border-bottom:2px solid #0a0a0a;position:relative}
+.mk-neue .post .folio{font-weight:900;font-size:64px;line-height:.78;letter-spacing:-.04em;color:#e3000f}
+.mk-neue .post .folio .of{display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;color:#0a0a0a;font-weight:700;margin-top:8px;opacity:.6}
+.mk-neue .post .meta{display:flex;gap:10px;align-items:center;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-bottom:11px;flex-wrap:wrap}
+.mk-neue .post .meta .cat{background:#0a0a0a;color:#fff;padding:3px 9px}
+.mk-neue .post .meta .date{opacity:.7}
+.mk-neue .post .ptitle{font-weight:800;letter-spacing:-.022em;line-height:1.0;font-size:33px;margin-bottom:13px}
+.mk-neue .post .ptitle a{color:#0a0a0a;text-decoration:none;background-image:linear-gradient(#e3000f,#e3000f);background-size:0% 6px;background-position:0 100%;background-repeat:no-repeat;transition:background-size .25s cubic-bezier(.7,0,.2,1);padding-bottom:2px}
+.mk-neue .post .ptitle a:hover{background-size:100% 6px}
+.mk-neue .post .summary{font-family:'Archivo Narrow',sans-serif;font-size:15px;line-height:1.42;max-width:62ch;margin-bottom:14px;font-weight:400}
+.mk-neue .chips{display:flex;flex-wrap:wrap;gap:7px}
+.mk-neue .chip{font-size:11px;letter-spacing:.06em;font-weight:600;font-family:'Space Mono',monospace;padding:3px 8px;border:1.5px solid #0a0a0a;text-transform:lowercase;transition:.16s}
+.mk-neue .chip:before{content:"";display:inline-block;width:5px;height:5px;background:#e3000f;margin-right:6px;vertical-align:middle}
+.mk-neue .chip:hover{background:#0a0a0a;color:#fff}
+.mk-neue .chip:hover:before{background:#fff}
+
+.mk-neue .foot{margin-top:40px;border-top:6px solid #0a0a0a;padding-top:18px;display:flex;justify-content:space-between;align-items:flex-end;gap:20px}
+.mk-neue .foot .copy{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.mk-neue .foot .copy .red{font-weight:700}
+.mk-neue .foot .flinks{display:flex;gap:10px}
+.mk-neue .foot .flinks a{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;color:#fff;background:#0a0a0a;padding:5px 10px;transition:.16s}
+.mk-neue .foot .flinks a:hover{background:#e3000f}
+.mk-neue .foot .endmark{writing-mode:vertical-rl;font-size:11px;letter-spacing:.3em;text-transform:uppercase;font-weight:700;color:#e3000f}
+
+.mk-neue .ahero{position:relative;padding:34px 46px 24px;border-bottom:6px solid #0a0a0a}
+.mk-neue .crumbs{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;margin-bottom:22px;display:flex;gap:9px;align-items:center}
+.mk-neue .crumbs .red{font-weight:700}
+.mk-neue .ahero .bignum{position:absolute;top:18px;right:40px;font-weight:900;font-size:120px;line-height:1;letter-spacing:-.05em;color:#e3000f;opacity:.13;pointer-events:none}
+.mk-neue .atitle{font-weight:900;letter-spacing:-.03em;line-height:.94;font-size:50px;max-width:17ch;text-transform:uppercase}
+.mk-neue .ameta{margin-top:20px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.04em;line-height:1.7;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.mk-neue .ameta .pipe{color:#e3000f;font-weight:700}
+.mk-neue .ameta b{font-weight:700}
+
+.mk-neue .abody{display:grid;grid-template-columns:200px 1fr;gap:40px;padding-top:34px}
+
+.mk-neue .toc{border:2px solid #0a0a0a;align-self:start;position:relative}
+.mk-neue .toc .tochd{background:#0a0a0a;color:#fff;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;padding:9px 12px;display:flex;justify-content:space-between;align-items:center}
+.mk-neue .toc .tochd:after{content:"§";color:#e3000f}
+.mk-neue .toc ol{list-style:none;counter-reset:t}
+.mk-neue .toc li{counter-increment:t;font-size:13px;font-weight:600;padding:9px 12px;border-bottom:1px solid #0a0a0a;display:flex;gap:10px;cursor:default;transition:.15s}
+.mk-neue .toc li:last-child{border-bottom:0}
+.mk-neue .toc li:before{content:counter(t,decimal-leading-zero);font-family:'Space Mono',monospace;color:#e3000f;font-weight:700}
+.mk-neue .toc li:hover{background:#e3000f;color:#fff}
+.mk-neue .toc li:hover:before{color:#fff}
+
+.mk-neue .content{min-width:0}
+.mk-neue .lead{font-family:'Archivo',sans-serif;font-size:19px;line-height:1.4;font-weight:500;letter-spacing:-.01em;padding-left:18px;border-left:6px solid #e3000f;margin-bottom:30px}
+.mk-neue .content h2{font-weight:800;letter-spacing:-.02em;line-height:1.02;font-size:27px;text-transform:uppercase;margin:34px 0 14px;display:flex;align-items:baseline;gap:13px}
+.mk-neue .content h2:before{content:"";flex:0 0 28px;height:5px;background:#e3000f;transform:translateY(-6px)}
+.mk-neue .content h3{font-weight:700;letter-spacing:-.01em;font-size:18px;margin:26px 0 11px;padding-bottom:6px;border-bottom:2px solid #0a0a0a}
+.mk-neue .content h3 .hn{font-family:'Space Mono',monospace;color:#e3000f;margin-right:8px}
+.mk-neue .content p{font-family:'Archivo Narrow',sans-serif;font-size:15.5px;line-height:1.5;margin-bottom:14px;max-width:64ch}
+.mk-neue .content ul{list-style:none;margin:0 0 18px;max-width:64ch}
+.mk-neue .content ul li{font-family:'Archivo Narrow',sans-serif;font-size:15px;line-height:1.45;padding:7px 0 7px 26px;position:relative;border-bottom:1px solid rgba(10,10,10,.18)}
+.mk-neue .content ul li:before{content:"";position:absolute;left:0;top:13px;width:13px;height:5px;background:#0a0a0a}
+.mk-neue .content ul li b{font-weight:700;font-family:'Archivo',sans-serif}
+
+.mk-neue .code{margin:20px 0 24px;border:2px solid #0a0a0a;background:#0a0a0a;position:relative}
+.mk-neue .code .tab{display:flex;justify-content:space-between;align-items:center;background:#0a0a0a;padding:0}
+.mk-neue .code .tab .lbl{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#0a0a0a;background:#e3000f;padding:6px 12px}
+.mk-neue .code .tab .dotz{display:flex;gap:6px;padding-right:12px}
+.mk-neue .code .tab .dotz i{width:8px;height:8px;background:#fff;opacity:.5;display:block;border-radius:0}
+.mk-neue .code pre{margin:0;padding:16px 18px;overflow-x:auto}
+.mk-neue .code code{font-family:'Space Mono',monospace;font-size:12.5px;line-height:1.65;color:#fff;white-space:pre;display:block}
+.mk-neue .code .kw{color:#e3000f;font-weight:700}
+.mk-neue .code .cm{color:#8a8a8a}
+.mk-neue .code .st{color:#fff;opacity:.78}
+.mk-neue .code .fn{color:#fff;font-weight:700}
+
+.mk-neue .pull{margin:26px 0;padding:24px 26px 24px 30px;background:#e3000f;color:#fff;position:relative;font-weight:800;letter-spacing:-.018em;line-height:1.08;font-size:25px}
+.mk-neue .pull:before{content:"\201C";position:absolute;left:8px;top:-6px;font-size:60px;font-weight:900;opacity:.45;line-height:1}
+.mk-neue .pull .attr{display:block;margin-top:12px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;opacity:.85}
+
+.mk-neue .ttitle{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;margin:24px 0 0;color:#e3000f}
+.mk-neue table.t{width:100%;border-collapse:collapse;margin:10px 0 8px;border:2px solid #0a0a0a}
+.mk-neue table.t th{background:#0a0a0a;color:#fff;text-align:left;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;padding:9px 12px}
+.mk-neue table.t th:first-child{border-right:2px solid #e3000f}
+.mk-neue table.t td{font-family:'Archivo Narrow',sans-serif;font-size:14px;font-weight:500;padding:10px 12px;border-top:1.5px solid #0a0a0a;vertical-align:top}
+.mk-neue table.t td:first-child{font-family:'Archivo',sans-serif;font-weight:700;width:38%;border-right:1.5px solid #0a0a0a;text-transform:uppercase;font-size:13px;letter-spacing:.02em}
+.mk-neue table.t tr:hover td{background:rgba(227,0,15,.08)}
+
+@media(max-width:680px){
+  .mk-neue .sitetitle{font-size:54px}
+  .mk-neue .abody{grid-template-columns:1fr}
+  .mk-neue .atitle{font-size:36px}
+}
+</style>
+
+<div class="mk-root mk-neue">
+  <h2 class="sr-only">Mockup of Kyle's blog in the Die Neue Typographie style, with toggleable home and article views.</h2>
+  <div class="frame">
+    <div class="bar">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <div class="url">xlyk.github.io</div>
+      <div class="seg">
+        <button data-view="home" data-active>Home</button><button data-view="article">Article</button>
+      </div>
+    </div>
+    <div class="screen">
+
+      <div class="view view-home">
+        <div class="hero">
+          <div class="toprule">
+            <span>Notes &middot; AI &middot; Code &middot; Tools</span>
+            <span class="est">Established MMXXVI</span>
+          </div>
+          <div class="masthead">
+            <h1 class="sitetitle">Kyle's<br><span class="blog">Blog</span></h1>
+            <div class="tagblock">
+              <p class="tagline">Notes on AI engineering, code, and the tools in between.</p>
+              <p class="author">By Kyle Hanks</p>
+            </div>
+          </div>
+          <nav class="nav">
+            <a href="#"><span class="n">01</span>Home</a>
+            <a href="#"><span class="n">02</span>Archive</a>
+            <a href="#"><span class="n">03</span>Categories</a>
+            <a href="#"><span class="n">04</span>Search</a>
+          </nav>
+        </div>
+
+        <div class="wrap">
+          <div class="seclabel">
+            <span class="big">Latest Dispatches</span>
+            <span class="rule"></span>
+            <span class="count">02 Entries</span>
+          </div>
+
+          <article class="post">
+            <div class="folio">01<span class="of">/ 02</span></div>
+            <div>
+              <div class="meta">
+                <span class="cat">AI Engineering</span>
+                <span class="date">Sep 20, 2025</span>
+              </div>
+              <h3 class="ptitle"><a href="#">Mastering Prompt Chaining with DSPy: A Structured Guide</a></h3>
+              <p class="summary">Moving beyond single-shot prompts: build and optimize prompt-chained LLM pipelines in DSPy &mdash; Signatures, Modules, Optimizers, and compilation, with practical Python examples.</p>
+              <div class="chips">
+                <span class="chip">dspy</span><span class="chip">prompt chaining</span><span class="chip">llm</span><span class="chip">optimization</span><span class="chip">python</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="post">
+            <div class="folio">02<span class="of">/ 02</span></div>
+            <div>
+              <div class="meta">
+                <span class="cat">General</span>
+                <span class="date">Sep 20, 2025</span>
+              </div>
+              <h3 class="ptitle"><a href="#">Hello World</a></h3>
+              <p class="summary">First post on my Pelican-powered blog.</p>
+              <div class="chips">
+                <span class="chip">intro</span><span class="chip">pelican</span>
+              </div>
+            </div>
+          </article>
+
+          <footer class="foot">
+            <div>
+              <p class="copy">&copy; 2026 Kyle Hanks &mdash; built with <span class="red">Pelican</span></p>
+            </div>
+            <div class="flinks">
+              <a href="#">RSS</a><a href="#">GitHub</a>
+            </div>
+            <div class="endmark">Neue &middot; 1928</div>
+          </footer>
+        </div>
+      </div>
+
+      <div class="view view-article" style="display:none">
+        <div class="ahero">
+          <div class="bignum">01</div>
+          <div class="crumbs"><span class="red">Home</span> <span>&rsaquo;</span> <span>AI Engineering</span> <span>&rsaquo;</span> <span>DSPy</span></div>
+          <h1 class="atitle">Mastering Prompt Chaining with DSPy</h1>
+          <div class="ameta">
+            <b>Sep 20, 2025</b><span class="pipe">/</span><b>AI Engineering</b><span class="pipe">/</span><span>9 min read</span><span class="pipe">/</span><span>tags: dspy, prompt chaining, llm, optimization, python</span>
+          </div>
+        </div>
+
+        <div class="wrap">
+          <div class="abody">
+            <aside class="toc">
+              <div class="tochd">Contents</div>
+              <ol>
+                <li>Introduction</li>
+                <li>DSPy Core Concepts</li>
+                <li>Signatures</li>
+                <li>Modules</li>
+                <li>Optimizers</li>
+              </ol>
+            </aside>
+
+            <div class="content">
+              <p class="lead">Moving beyond simple, single-shot prompts is crucial for building sophisticated applications. DSPy, a framework from Stanford, replaces brittle manual prompt engineering with a systematic, programmatic approach &mdash; you define the logic and structure of a pipeline, and DSPy's optimizers find the most effective prompts.</p>
+
+              <h2>Introduction: Beyond Manual Prompting</h2>
+              <p>DSPy shifts development away from endless prompt tweaking toward a modular approach. Instead of fiddling with phrasing, you declare the inputs and outputs of each step and let the compiler optimize the prompts for a metric.</p>
+
+              <h2>DSPy Core Concepts</h2>
+              <p>The power of DSPy lies in a few components that compose into optimizable pipelines.</p>
+
+              <h3><span class="hn">1.</span>Signatures: Defining the I/O</h3>
+              <p>A Signature is a declarative spec of a task's inputs and outputs. It separates the <em>what</em> from the <em>how</em>.</p>
+              <ul>
+                <li><b>Inputs</b> &mdash; what the module needs (e.g. question, context)</li>
+                <li><b>Outputs</b> &mdash; what it should produce (e.g. answer)</li>
+              </ul>
+
+              <div class="code">
+                <div class="tab"><span class="lbl">Code / Python</span><span class="dotz"><i></i><i></i><i></i></span></div>
+<pre><code><span class="kw">class</span> <span class="fn">BasicQA</span>(dspy.Signature):
+    <span class="cm">"""Answer questions with short factoid answers."""</span>
+    question = dspy.<span class="fn">InputField</span>(desc=<span class="st">"The question to answer"</span>)
+    answer = dspy.<span class="fn">OutputField</span>(desc=<span class="st">"Often one word or a short phrase"</span>)</code></pre>
+              </div>
+
+              <blockquote class="pull">Don't tune prompts by hand. Define the pipeline, then compile it against a metric.<span class="attr">&mdash; The DSPy Principle</span></blockquote>
+
+              <h3><span class="hn">2.</span>Modules: The Building Blocks</h3>
+              <p>Modules wrap Signatures with a prompting strategy &mdash; Predict, ChainOfThought, ReAct &mdash; and can be composed into larger programs.</p>
+
+              <p class="ttitle">Table 01 &mdash; Core Components</p>
+              <table class="t">
+                <thead><tr><th>Component</th><th>Role</th></tr></thead>
+                <tbody>
+                  <tr><td>Signature</td><td>Declares inputs &amp; outputs</td></tr>
+                  <tr><td>Module</td><td>Building block with a strategy</td></tr>
+                  <tr><td>Optimizer</td><td>Tunes prompts against a metric</td></tr>
+                </tbody>
+              </table>
+
+              <footer class="foot">
+                <div><p class="copy">&copy; 2026 Kyle Hanks &mdash; built with <span class="red">Pelican</span></p></div>
+                <div class="flinks"><a href="#">RSS</a><a href="#">GitHub</a></div>
+                <div class="endmark">Neue &middot; 1928</div>
+              </footer>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script>(function(){var r=document.querySelector('.mk-neue');if(!r)return;var bs=r.querySelectorAll('[data-view]');var vs=r.querySelectorAll('.view');bs.forEach(function(b){b.addEventListener('click',function(){var v=b.getAttribute('data-view');vs.forEach(function(e){e.style.display=e.classList.contains('view-'+v)?'':'none';});bs.forEach(function(x){x.removeAttribute('data-active');});b.setAttribute('data-active','');});});})();</script></div></body></html>

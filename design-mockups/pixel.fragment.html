@@ -1,0 +1,255 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+.mk-pixel{ --bg:#1a1c2c; --panel:#29366f; --red:#ff004d; --green:#00e436; --blue:#29adff; --yellow:#ffec27; --white:#f4f4f4; --muted:#5f574f; --ink:#0c0d18; }
+.mk-pixel *{ box-sizing:border-box; }
+.mk-pixel .frame{ background:var(--color-background-secondary); border:1px solid var(--color-border-tertiary); border-radius:12px; overflow:hidden; font-family:var(--font-sans); }
+.mk-pixel .bar{ display:flex; align-items:center; gap:10px; padding:9px 12px; border-bottom:1px solid var(--color-border-tertiary); }
+.mk-pixel .bar .dot{ width:11px; height:11px; border-radius:50%; background:var(--color-border-tertiary); }
+.mk-pixel .bar .url{ flex:0 1 auto; font-size:12px; color:var(--color-text-primary); background:var(--color-background-primary); border:1px solid var(--color-border-tertiary); border-radius:999px; padding:4px 14px; margin:0 auto 0 6px; }
+.mk-pixel .seg{ display:flex; border:1px solid var(--color-border-tertiary); border-radius:8px; overflow:hidden; margin-left:auto; }
+.mk-pixel .seg button{ font-family:var(--font-sans); font-size:12px; padding:5px 13px; border:0; background:transparent; color:var(--color-text-primary); cursor:pointer; }
+.mk-pixel .seg button[data-active]{ background:var(--color-text-primary); color:var(--color-background-primary); }
+
+.mk-pixel .screen{ position:relative; min-height:620px; padding:0; color:var(--white); background:
+  repeating-linear-gradient(45deg, rgba(255,255,255,.022) 0 8px, transparent 8px 16px),
+  repeating-linear-gradient(-45deg, rgba(0,0,0,.18) 0 8px, transparent 8px 16px),
+  var(--bg);
+  font-family:'VT323',monospace; }
+.mk-pixel .screen::before{ content:""; position:absolute; inset:0; pointer-events:none; z-index:0;
+  background-image:radial-gradient(var(--yellow) 1px, transparent 1px), radial-gradient(var(--blue) 1px, transparent 1px);
+  background-size:120px 90px, 170px 130px; background-position:10px 20px, 80px 60px; opacity:.5; animation:mk-tw 1.4s steps(2) infinite; }
+@keyframes mk-tw{ 0%,100%{opacity:.5} 50%{opacity:.15} }
+.mk-pixel .screen>*{ position:relative; z-index:1; }
+
+.mk-pixel .hud{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; padding:12px 18px; background:var(--ink);
+  border-bottom:4px solid var(--blue); box-shadow:0 4px 0 rgba(0,0,0,.4); }
+.mk-pixel .ps{ font-family:'Press Start 2P'; font-size:12px; color:var(--green); letter-spacing:1px; }
+.mk-pixel .blink{ animation:mk-blink 1s steps(1) infinite; }
+@keyframes mk-blink{ 50%{opacity:0} }
+.mk-pixel .stat{ font-family:'Press Start 2P'; font-size:11px; display:flex; align-items:center; gap:8px; }
+.mk-pixel .barwrap{ width:84px; height:14px; background:#000; border:2px solid var(--white); padding:2px; }
+.mk-pixel .fill{ height:100%; }
+.mk-pixel .fill.hp{ width:80%; background:var(--green); }
+.mk-pixel .fill.xp{ width:62%; background:var(--yellow); }
+.mk-pixel .heart{ width:12px; height:12px; background:var(--red); position:relative; display:inline-block; transform:rotate(45deg); }
+.mk-pixel .heart::before,.mk-pixel .heart::after{ content:""; position:absolute; width:12px; height:12px; background:var(--red); }
+.mk-pixel .heart::before{ top:-6px; left:0; } .mk-pixel .heart::after{ left:6px; top:0; }
+.mk-pixel .coin{ width:13px; height:13px; background:var(--yellow); box-shadow:inset 0 0 0 3px var(--ink), inset 0 0 0 5px var(--yellow); display:inline-block; }
+.mk-pixel .star{ display:inline-block; width:14px; height:14px; background:var(--yellow); clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%); }
+.mk-pixel .hud .right{ margin-left:auto; display:flex; align-items:center; gap:16px; }
+
+.mk-pixel .nav{ display:flex; align-items:center; gap:0; padding:0 18px; background:var(--panel); border-bottom:4px solid var(--ink); }
+.mk-pixel .nav a{ font-family:'Press Start 2P'; font-size:11px; color:var(--white); text-decoration:none; padding:14px 16px; border-right:2px solid rgba(0,0,0,.35); position:relative; }
+.mk-pixel .nav a:first-child{ color:var(--yellow); }
+.mk-pixel .nav a:hover{ background:var(--blue); color:var(--ink); }
+.mk-pixel .nav a:hover::before{ content:"\25BA"; position:absolute; left:3px; top:50%; transform:translateY(-50%); font-size:8px; color:var(--ink); }
+
+.mk-pixel .wrap{ padding:24px 26px 30px; }
+.mk-pixel .hero{ background:var(--ink); border:4px solid var(--white); box-shadow:6px 6px 0 #000; padding:22px 22px 20px; margin-bottom:26px; position:relative;
+  background-image:repeating-linear-gradient(0deg, rgba(41,173,255,.07) 0 3px, transparent 3px 6px); }
+.mk-pixel .hero h1{ font-family:'Press Start 2P'; font-size:22px; line-height:1.5; color:var(--yellow); margin:0 0 14px; text-shadow:4px 4px 0 var(--red); }
+.mk-pixel .hero p{ font-size:21px; line-height:1.2; color:var(--blue); margin:0; }
+.mk-pixel .hero .author{ font-family:'Press Start 2P'; font-size:10px; color:var(--green); margin-top:14px; }
+
+.mk-pixel .sect{ font-family:'Press Start 2P'; font-size:12px; color:var(--white); margin:0 0 16px; display:flex; align-items:center; gap:10px; }
+.mk-pixel .sect::before{ content:""; width:14px; height:14px; background:var(--red); box-shadow:4px 0 0 var(--yellow),8px 0 0 var(--blue); }
+
+.mk-pixel .card{ display:block; text-decoration:none; color:var(--white); background:var(--panel); border:4px solid var(--white);
+  box-shadow:5px 5px 0 #000; padding:18px 20px 18px 44px; margin-bottom:20px; position:relative; transition:transform .08s steps(2),box-shadow .08s steps(2); }
+.mk-pixel .card::before{ content:"\25BA"; position:absolute; left:14px; top:18px; font-family:'Press Start 2P'; font-size:13px; color:var(--green); opacity:0; }
+.mk-pixel .card:hover{ transform:translate(-2px,-3px); box-shadow:8px 9px 0 #000; background:#34439a; }
+.mk-pixel .card:hover::before{ opacity:1; animation:mk-blink .6s steps(1) infinite; }
+.mk-pixel .card:hover .ctitle{ color:var(--yellow); }
+.mk-pixel .ctitle{ font-family:'Press Start 2P'; font-size:13px; line-height:1.55; color:var(--white); margin:0 0 12px; }
+.mk-pixel .new{ font-family:'Press Start 2P'; font-size:9px; color:var(--ink); background:var(--green); padding:4px 6px; margin-left:8px; box-shadow:3px 3px 0 #000; animation:mk-blink .9s steps(1) infinite; vertical-align:2px; }
+.mk-pixel .meta{ font-size:18px; color:var(--blue); margin:0 0 10px; display:flex; flex-wrap:wrap; gap:6px 12px; align-items:center; }
+.mk-pixel .meta .cat{ color:var(--yellow); }
+.mk-pixel .chips{ display:flex; flex-wrap:wrap; gap:8px; margin:0 0 12px; }
+.mk-pixel .chip{ font-family:'Press Start 2P'; font-size:9px; color:var(--ink); background:var(--blue); padding:5px 7px; box-shadow:3px 3px 0 #000; }
+.mk-pixel .chip:nth-child(2n){ background:var(--green); }
+.mk-pixel .chip:nth-child(3n){ background:var(--yellow); }
+.mk-pixel .summ{ font-size:20px; line-height:1.25; color:var(--white); margin:0; }
+
+.mk-pixel .footer{ margin-top:8px; background:var(--ink); border-top:4px solid var(--red); padding:18px 26px; display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; }
+.mk-pixel .footer .ft{ font-family:'Press Start 2P'; font-size:10px; color:var(--muted); line-height:1.6; }
+.mk-pixel .footer a{ font-family:'Press Start 2P'; font-size:10px; color:var(--blue); text-decoration:none; margin-left:auto; }
+.mk-pixel .footer a:hover{ color:var(--yellow); }
+.mk-pixel .footer .links{ margin-left:auto; display:flex; gap:16px; }
+.mk-pixel .footer .links a{ margin:0; }
+
+.mk-pixel .levelup{ text-align:center; font-family:'Press Start 2P'; font-size:13px; color:var(--yellow); padding:14px; margin-bottom:24px; border:4px dashed var(--green); background:rgba(0,228,54,.06); animation:mk-blink 1.4s steps(1) infinite; }
+
+.mk-pixel .atitle{ font-family:'Press Start 2P'; font-size:19px; line-height:1.6; color:var(--yellow); text-shadow:4px 4px 0 var(--red); margin:0 0 16px; }
+.mk-pixel .ameta{ font-size:18px; color:var(--blue); margin:0 0 22px; line-height:1.4; }
+.mk-pixel .ameta .cat{ color:var(--yellow); }
+
+.mk-pixel .toc{ background:var(--ink); border:4px solid var(--blue); box-shadow:5px 5px 0 #000; padding:16px 20px; margin:0 0 24px; }
+.mk-pixel .toc h4{ font-family:'Press Start 2P'; font-size:11px; color:var(--green); margin:0 0 12px; }
+.mk-pixel .toc ol{ list-style:none; margin:0; padding:0; }
+.mk-pixel .toc li{ font-size:19px; color:var(--white); padding:3px 0 3px 22px; position:relative; }
+.mk-pixel .toc li::before{ content:"\25BA"; position:absolute; left:0; top:5px; font-size:11px; color:var(--red); }
+.mk-pixel .toc li:hover{ color:var(--yellow); } .mk-pixel .toc li:hover::before{ color:var(--yellow); }
+
+.mk-pixel .lead{ font-size:22px; line-height:1.3; color:var(--white); border-left:6px solid var(--yellow); padding-left:16px; margin:0 0 26px; }
+.mk-pixel .screen h2{ font-family:'Press Start 2P'; font-size:14px; line-height:1.6; color:var(--blue); margin:30px 0 14px; padding-bottom:10px; border-bottom:3px solid var(--panel); }
+.mk-pixel .screen h3{ font-family:'Press Start 2P'; font-size:12px; line-height:1.6; color:var(--green); margin:24px 0 12px; }
+.mk-pixel .screen p{ font-size:20px; line-height:1.32; color:var(--white); margin:0 0 16px; }
+
+.mk-pixel ul.px{ list-style:none; margin:0 0 18px; padding:0; }
+.mk-pixel ul.px li{ font-size:20px; line-height:1.3; color:var(--white); padding:6px 0 6px 26px; position:relative; }
+.mk-pixel ul.px li::before{ content:""; position:absolute; left:0; top:11px; width:12px; height:12px; background:var(--green); box-shadow:3px 3px 0 #000; }
+.mk-pixel ul.px li:nth-child(2n)::before{ background:var(--yellow); }
+
+.mk-pixel .term{ background:#000; border:4px solid var(--green); box-shadow:5px 5px 0 #000; margin:0 0 24px; }
+.mk-pixel .term .top{ background:var(--green); display:flex; align-items:center; gap:8px; padding:6px 10px; }
+.mk-pixel .term .top .tdot{ width:11px; height:11px; background:var(--ink); }
+.mk-pixel .term .top .tdot:nth-child(1){ background:var(--red); }
+.mk-pixel .term .top .tdot:nth-child(2){ background:var(--yellow); }
+.mk-pixel .term .top .tt{ font-family:'Press Start 2P'; font-size:9px; color:var(--ink); margin-left:6px; }
+.mk-pixel .term pre{ margin:0; padding:16px 18px; overflow-x:auto; }
+.mk-pixel .term code{ font-family:'VT323',monospace; font-size:19px; line-height:1.4; color:var(--green); white-space:pre; display:block; }
+.mk-pixel .term .kw{ color:var(--red); } .mk-pixel .term .cls{ color:var(--yellow); }
+.mk-pixel .term .fn{ color:var(--blue); } .mk-pixel .term .str{ color:#f4a8c0; }
+.mk-pixel .term .cm{ color:var(--muted); }
+
+.mk-pixel blockquote{ margin:0 0 26px; background:var(--panel); border:4px double var(--white); box-shadow:inset 0 0 0 3px var(--ink),5px 5px 0 #000; padding:18px 20px 18px 50px; position:relative; }
+.mk-pixel blockquote::before{ content:"\275D"; position:absolute; left:14px; top:14px; font-family:'Press Start 2P'; font-size:18px; color:var(--yellow); }
+.mk-pixel blockquote p{ font-size:21px; line-height:1.3; color:var(--yellow); margin:0; font-style:normal; }
+
+.mk-pixel table.px{ width:100%; border-collapse:separate; border-spacing:0; margin:0 0 24px; border:4px solid var(--white); box-shadow:5px 5px 0 #000; }
+.mk-pixel table.px th{ font-family:'Press Start 2P'; font-size:10px; color:var(--ink); background:var(--yellow); text-align:left; padding:11px 12px; border-bottom:4px solid var(--white); }
+.mk-pixel table.px th:first-child{ border-right:4px solid var(--white); }
+.mk-pixel table.px td{ font-size:19px; color:var(--white); background:var(--panel); padding:9px 12px; border-bottom:2px solid var(--ink); }
+.mk-pixel table.px td:first-child{ font-family:'Press Start 2P'; font-size:10px; color:var(--green); border-right:4px solid var(--white); width:38%; }
+.mk-pixel table.px tr:last-child td{ border-bottom:0; }
+.mk-pixel table.px tr:hover td{ background:#34439a; }
+</style>
+
+<div class="mk-root mk-pixel">
+  <div class="frame">
+    <div class="bar">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="url">xlyk.github.io</span>
+      <div class="seg">
+        <button data-view="home" data-active>Home</button><button data-view="article">Article</button>
+      </div>
+    </div>
+    <div class="screen">
+
+      <div class="hud">
+        <span class="ps">KYLE.EXE</span>
+        <span class="stat" style="color:var(--green)">HP<span class="barwrap"><span class="fill hp"></span></span></span>
+        <span class="stat" style="color:var(--yellow)">XP<span class="barwrap"><span class="fill xp"></span></span></span>
+        <span class="right">
+          <span class="stat" style="color:var(--red)"><span class="heart"></span>x3</span>
+          <span class="stat" style="color:var(--yellow)"><span class="coin"></span>x99</span>
+          <span class="stat" style="color:var(--yellow)"><span class="star"></span>x7</span>
+          <span class="ps blink" style="color:var(--green);font-size:10px">PRESS START</span>
+        </span>
+      </div>
+
+      <nav class="nav">
+        <a href="#">Home</a><a href="#">Archive</a><a href="#">Categories</a><a href="#">Search</a>
+      </nav>
+
+      <div class="view view-home">
+        <div class="wrap">
+          <header class="hero">
+            <h1>KYLE'S BLOG</h1>
+            <p>&gt; Notes on AI engineering, code, and the tools in between.</p>
+            <div class="author">PLAYER 1: KYLE HANKS</div>
+          </header>
+
+          <h2 class="sect">SELECT A QUEST</h2>
+
+          <a href="#" class="card">
+            <h3 class="ctitle">Mastering Prompt Chaining with DSPy: A Structured Guide<span class="new">NEW!</span></h3>
+            <p class="meta"><span>Sep 20, 2025</span><span class="cat">&#9670; AI Engineering</span></p>
+            <div class="chips">
+              <span class="chip">dspy</span><span class="chip">prompt chaining</span><span class="chip">llm</span><span class="chip">optimization</span><span class="chip">python</span>
+            </div>
+            <p class="summ">Moving beyond single-shot prompts: build and optimize prompt-chained LLM pipelines in DSPy — Signatures, Modules, Optimizers, and compilation, with practical Python examples.</p>
+          </a>
+
+          <a href="#" class="card">
+            <h3 class="ctitle">Hello World</h3>
+            <p class="meta"><span>Sep 20, 2025</span><span class="cat">&#9670; General</span></p>
+            <div class="chips">
+              <span class="chip">intro</span><span class="chip">pelican</span>
+            </div>
+            <p class="summ">First post on my Pelican-powered blog.</p>
+          </a>
+        </div>
+
+        <footer class="footer">
+          <span class="ft">&copy; 2026 Kyle Hanks<br>BUILT WITH PELICAN</span>
+          <span class="links"><a href="#">RSS</a><a href="#">GITHUB</a></span>
+        </footer>
+      </div>
+
+      <div class="view view-article" style="display:none">
+        <div class="wrap">
+          <div class="levelup">&#9733; LEVEL UP! NEW SKILL UNLOCKED &#9733;</div>
+
+          <h1 class="atitle">Mastering Prompt Chaining with DSPy: A Structured Guide</h1>
+          <p class="ameta">Sep 20, 2025 &middot; <span class="cat">AI Engineering</span> &middot; 9 min read<br>tags: dspy, prompt chaining, llm, optimization, python</p>
+
+          <div class="toc">
+            <h4>&#9654; TABLE OF CONTENTS</h4>
+            <ol>
+              <li>Introduction</li>
+              <li>DSPy Core Concepts</li>
+              <li>Signatures</li>
+              <li>Modules</li>
+              <li>Optimizers</li>
+            </ol>
+          </div>
+
+          <p class="lead">Moving beyond simple, single-shot prompts is crucial for building sophisticated applications. DSPy, a framework from Stanford, replaces brittle manual prompt engineering with a systematic, programmatic approach — you define the logic and structure of a pipeline, and DSPy's optimizers find the most effective prompts.</p>
+
+          <h2>Introduction: Beyond Manual Prompting</h2>
+          <p>DSPy shifts development away from endless prompt tweaking toward a modular approach. Instead of fiddling with phrasing, you declare the inputs and outputs of each step and let the compiler optimize the prompts for a metric.</p>
+
+          <h2>DSPy Core Concepts</h2>
+          <p>The power of DSPy lies in a few components that compose into optimizable pipelines.</p>
+
+          <h3>1. Signatures: Defining the I/O</h3>
+          <p>A Signature is a declarative spec of a task's inputs and outputs. It separates the what from the how.</p>
+          <ul class="px">
+            <li>Inputs — what the module needs (e.g. question, context)</li>
+            <li>Outputs — what it should produce (e.g. answer)</li>
+          </ul>
+
+          <div class="term">
+            <div class="top"><span class="tdot"></span><span class="tdot"></span><span class="tdot"></span><span class="tt">basic_qa.py</span></div>
+            <pre><code><span class="kw">class</span> <span class="cls">BasicQA</span>(dspy.Signature):
+    <span class="str">"""Answer questions with short factoid answers."""</span>
+    question = dspy.<span class="fn">InputField</span>(desc=<span class="str">"The question to answer"</span>)
+    answer = dspy.<span class="fn">OutputField</span>(desc=<span class="str">"Often one word or a short phrase"</span>)</code></pre>
+          </div>
+
+          <blockquote><p>Don't tune prompts by hand. Define the pipeline, then compile it against a metric.</p></blockquote>
+
+          <h3>2. Modules: The Building Blocks</h3>
+          <p>Modules wrap Signatures with a prompting strategy — Predict, ChainOfThought, ReAct — and can be composed into larger programs.</p>
+
+          <table class="px">
+            <tr><th>Component</th><th>Role</th></tr>
+            <tr><td>Signature</td><td>Declares inputs &amp; outputs</td></tr>
+            <tr><td>Module</td><td>Building block with a strategy</td></tr>
+            <tr><td>Optimizer</td><td>Tunes prompts against a metric</td></tr>
+          </table>
+        </div>
+
+        <footer class="footer">
+          <span class="ft">&copy; 2026 Kyle Hanks<br>BUILT WITH PELICAN</span>
+          <span class="links"><a href="#">RSS</a><a href="#">GITHUB</a></span>
+        </footer>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>(function(){var r=document.querySelector('.mk-pixel');if(!r)return;var bs=r.querySelectorAll('[data-view]');var vs=r.querySelectorAll('.view');bs.forEach(function(b){b.addEventListener('click',function(){var v=b.getAttribute('data-view');vs.forEach(function(e){e.style.display=e.classList.contains('view-'+v)?'':'none';});bs.forEach(function(x){x.removeAttribute('data-active');});b.setAttribute('data-active','');});});})();</script>

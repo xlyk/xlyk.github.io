@@ -1,0 +1,256 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+.mk-glass *{box-sizing:border-box;margin:0;padding:0}
+.mk-glass{font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.6}
+.mk-glass .frame{border-radius:12px;border:1px solid var(--color-border-tertiary);background:var(--color-background-secondary);overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.mk-glass .bar{display:flex;align-items:center;gap:12px;padding:9px 14px;border-bottom:1px solid var(--color-border-tertiary);background:var(--color-background-secondary)}
+.mk-glass .bar .dots{display:flex;gap:6px}
+.mk-glass .bar .dots i{width:11px;height:11px;border-radius:50%;display:block;background:var(--color-border-tertiary)}
+.mk-glass .bar .url{flex:1;max-width:260px;margin:0 auto;text-align:center;font-size:12px;color:var(--color-text-primary);opacity:.7;background:var(--color-background-primary);border:1px solid var(--color-border-tertiary);border-radius:7px;padding:4px 12px;font-family:var(--font-sans)}
+.mk-glass .seg{display:flex;border:1px solid var(--color-border-tertiary);border-radius:8px;overflow:hidden}
+.mk-glass .seg button{font-family:var(--font-sans);font-size:12px;padding:5px 13px;border:0;background:transparent;color:var(--color-text-primary);cursor:pointer;opacity:.65}
+.mk-glass .seg button[data-active]{background:var(--color-background-primary);opacity:1;font-weight:500;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+
+.mk-glass .screen{position:relative;min-height:620px;overflow:hidden;background:#0f1226;isolation:isolate}
+.mk-glass .blobs{position:absolute;inset:-12%;z-index:0;filter:blur(8px)}
+.mk-glass .blob{position:absolute;border-radius:50%;opacity:.85;mix-blend-mode:screen;will-change:transform}
+.mk-glass .b1{width:46%;height:46%;left:-6%;top:-8%;background:radial-gradient(circle at 35% 35%,#7b5cff,rgba(123,92,255,0) 70%);animation:gfloat1 19s ease-in-out infinite}
+.mk-glass .b2{width:50%;height:50%;right:-10%;top:-4%;background:radial-gradient(circle at 50% 50%,#ff5c87,rgba(255,92,135,0) 70%);animation:gfloat2 23s ease-in-out infinite}
+.mk-glass .b3{width:52%;height:52%;left:8%;bottom:-18%;background:radial-gradient(circle at 50% 50%,#4cc9f0,rgba(76,201,240,0) 70%);animation:gfloat3 21s ease-in-out infinite}
+.mk-glass .b4{width:40%;height:40%;right:2%;bottom:-12%;background:radial-gradient(circle at 50% 50%,#ffb86c,rgba(255,184,108,0) 70%);animation:gfloat4 26s ease-in-out infinite}
+@keyframes gfloat1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(8%,6%) scale(1.12)}}
+@keyframes gfloat2{0%,100%{transform:translate(0,0) scale(1.05)}50%{transform:translate(-7%,9%) scale(.92)}}
+@keyframes gfloat3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(6%,-8%) scale(1.1)}}
+@keyframes gfloat4{0%,100%{transform:translate(0,0) scale(.95)}50%{transform:translate(-9%,-6%) scale(1.15)}}
+.mk-glass .grain{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.mk-glass .stage{position:relative;z-index:2}
+
+.mk-glass .gnav{position:sticky;top:0;z-index:20;margin:14px;padding:13px 20px;display:flex;align-items:center;gap:16px;background:rgba(255,255,255,.10);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border:1px solid rgba(255,255,255,.18);border-radius:20px;box-shadow:0 8px 32px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.25)}
+.mk-glass .brand{display:flex;align-items:center;gap:11px;margin-right:auto}
+.mk-glass .logo{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,#7b5cff,#ff5c87 55%,#ffb86c);box-shadow:0 4px 14px rgba(123,92,255,.5),inset 0 1px 0 rgba(255,255,255,.4);flex:none}
+.mk-glass .brand b{color:#fff;font-size:15px;font-weight:600;letter-spacing:-.01em;display:block;line-height:1.1}
+.mk-glass .brand span{color:rgba(255,255,255,.62);font-size:11px;font-weight:400}
+.mk-glass .gnav nav{display:flex;gap:6px}
+.mk-glass .gnav a{color:rgba(255,255,255,.78);font-size:13px;font-weight:500;text-decoration:none;padding:7px 15px;border-radius:999px;transition:all .25s cubic-bezier(.4,0,.2,1)}
+.mk-glass .gnav a:hover{color:#fff;background:rgba(255,255,255,.14)}
+.mk-glass .gnav a.on{color:#fff;background:rgba(255,255,255,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.3)}
+
+.mk-glass .wrap{padding:8px 24px 30px}
+.mk-glass .hero{padding:34px 8px 26px;text-align:center}
+.mk-glass .hero h1{color:#fff;font-size:38px;font-weight:700;letter-spacing:-.025em;line-height:1.08;text-shadow:0 2px 24px rgba(0,0,0,.3)}
+.mk-glass .hero p{color:rgba(255,255,255,.74);font-size:16px;font-weight:400;margin-top:12px;max-width:480px;margin-inline:auto}
+.mk-glass .hero .by{margin-top:16px;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.10);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:6px 14px 6px 7px;color:rgba(255,255,255,.85);font-size:12px;font-weight:500}
+.mk-glass .hero .by .av{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#4cc9f0,#7b5cff);flex:none}
+
+.mk-glass .card{position:relative;background:rgba(255,255,255,.10);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);border:1px solid rgba(255,255,255,.16);border-radius:22px;box-shadow:0 8px 32px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.22);padding:24px 26px;transition:transform .35s cubic-bezier(.34,1.4,.5,1),background .35s ease,box-shadow .35s ease}
+.mk-glass .post+.post{margin-top:18px}
+.mk-glass .post:hover{transform:translateY(-4px);background:rgba(255,255,255,.15);box-shadow:0 16px 44px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.3)}
+.mk-glass .pmeta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:11px}
+.mk-glass .chip{font-size:11px;font-weight:500;padding:4px 11px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.85)}
+.mk-glass .chip.cat{background:linear-gradient(135deg,rgba(123,92,255,.5),rgba(255,92,135,.42));border-color:rgba(255,255,255,.28);color:#fff}
+.mk-glass .chip.dot{background:transparent;border:0;color:rgba(255,255,255,.55);padding:0;font-weight:400}
+.mk-glass .post h2{font-size:23px;font-weight:600;letter-spacing:-.02em;line-height:1.18}
+.mk-glass .post h2 a{color:#fff;text-decoration:none;background-image:linear-gradient(#4cc9f0,#4cc9f0);background-size:0 2px;background-repeat:no-repeat;background-position:0 100%;transition:background-size .3s ease}
+.mk-glass .post h2 a:hover{background-size:100% 2px}
+.mk-glass .post p.sum{color:rgba(255,255,255,.74);font-size:14.5px;font-weight:400;margin:11px 0 14px}
+.mk-glass .tags{display:flex;flex-wrap:wrap;gap:7px}
+.mk-glass .tag{font-size:11px;font-weight:500;padding:4px 11px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.72);transition:all .2s ease}
+.mk-glass .tag:hover{background:rgba(255,255,255,.18);color:#fff}
+
+.mk-glass .gfoot{margin:6px 14px 16px;padding:16px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:rgba(255,255,255,.08);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.14);border-radius:18px;color:rgba(255,255,255,.62);font-size:12.5px}
+.mk-glass .gfoot .sp{margin-left:auto;display:flex;gap:8px}
+.mk-glass .gfoot a{color:rgba(255,255,255,.82);text-decoration:none;font-size:12px;font-weight:500;padding:5px 13px;border-radius:999px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);transition:all .25s ease}
+.mk-glass .gfoot a:hover{background:rgba(255,255,255,.2);color:#fff}
+
+.mk-glass .art{max-width:620px;margin:0 auto}
+.mk-glass .art h1{color:#fff;font-size:31px;font-weight:700;letter-spacing:-.025em;line-height:1.14;text-shadow:0 2px 22px rgba(0,0,0,.3)}
+.mk-glass .amETA,.mk-glass .ameta{margin:13px 0 0;color:rgba(255,255,255,.66);font-size:12.5px;font-weight:400;display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+.mk-glass .ameta b{color:#fff;font-weight:500}
+.mk-glass .ameta .d{opacity:.4}
+.mk-glass .toc{margin:22px 0;padding:18px 22px;background:rgba(255,255,255,.10);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);border:1px solid rgba(255,255,255,.18);border-radius:18px;box-shadow:0 8px 28px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.22)}
+.mk-glass .toc .tt{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:11px}
+.mk-glass .toc ol{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;counter-reset:t}
+.mk-glass .toc li{counter-increment:t;color:rgba(255,255,255,.82);font-size:13px;font-weight:500;display:flex;align-items:center;gap:9px}
+.mk-glass .toc li::before{content:counter(t);width:21px;height:21px;border-radius:7px;background:rgba(123,92,255,.4);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;flex:none}
+.mk-glass .lead{color:rgba(255,255,255,.88);font-size:16.5px;font-weight:400;line-height:1.66;margin:6px 0 4px;padding-left:15px;border-left:2px solid rgba(255,184,108,.7)}
+.mk-glass .art h2{color:#fff;font-size:21px;font-weight:600;letter-spacing:-.015em;margin:30px 0 4px}
+.mk-glass .art h3{color:#fff;font-size:16.5px;font-weight:600;margin:24px 0 4px}
+.mk-glass .art p{color:rgba(255,255,255,.76);font-size:14.5px;font-weight:400;line-height:1.72;margin:11px 0}
+.mk-glass .art ul{margin:12px 0;padding:0;list-style:none;display:grid;gap:9px}
+.mk-glass .art ul li{position:relative;padding:11px 16px 11px 38px;color:rgba(255,255,255,.8);font-size:14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);border-radius:13px}
+.mk-glass .art ul li::before{content:'';position:absolute;left:15px;top:16px;width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#4cc9f0,#7b5cff);box-shadow:0 0 10px rgba(76,201,240,.7)}
+.mk-glass .art ul li b{color:#fff;font-weight:600}
+
+.mk-glass .code{margin:18px 0;border-radius:16px;overflow:hidden;background:rgba(8,8,20,.42);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);border:1px solid rgba(255,255,255,.14);box-shadow:0 8px 30px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.1)}
+.mk-glass .code .ch{display:flex;align-items:center;gap:7px;padding:9px 15px;border-bottom:1px solid rgba(255,255,255,.09)}
+.mk-glass .code .ch i{width:9px;height:9px;border-radius:50%;display:block}
+.mk-glass .code .ch .r{background:#ff5c87}.mk-glass .code .ch .y{background:#ffb86c}.mk-glass .code .ch .g{background:#4cc9f0}
+.mk-glass .code .ch span{margin-left:8px;font-size:11px;color:rgba(255,255,255,.5);font-family:var(--font-mono),ui-monospace,monospace}
+.mk-glass .code pre{margin:0;padding:16px 18px;overflow-x:auto;font-family:var(--font-mono),'SF Mono',ui-monospace,Menlo,monospace;font-size:12.8px;line-height:1.7;color:rgba(255,255,255,.9)}
+.mk-glass .k{color:#a78bff}.mk-glass .t{color:#7be0ff}.mk-glass .s{color:#ffc89a}.mk-glass .c{color:rgba(255,255,255,.4);font-style:italic}.mk-glass .f{color:#ff9ec0}
+
+.mk-glass blockquote{margin:22px 0;padding:20px 24px;background:linear-gradient(135deg,rgba(123,92,255,.20),rgba(76,201,240,.14));backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.2);border-radius:18px;box-shadow:inset 0 1px 0 rgba(255,255,255,.22);color:#fff;font-size:17px;font-weight:500;line-height:1.5;font-style:italic;position:relative}
+.mk-glass blockquote::before{content:'\201C';position:absolute;top:-2px;left:14px;font-size:46px;color:rgba(255,255,255,.3);font-family:Georgia,serif}
+.mk-glass blockquote p{margin:0;padding:0 0 0 26px;color:#fff;font-size:17px}
+
+.mk-glass .tbl{margin:18px 0;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.08);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border:1px solid rgba(255,255,255,.16);box-shadow:0 8px 28px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.18)}
+.mk-glass table{width:100%;border-collapse:collapse;font-size:13.5px}
+.mk-glass th{text-align:left;padding:12px 18px;color:#fff;font-weight:600;font-size:12px;letter-spacing:.04em;background:rgba(255,255,255,.10);border-bottom:1px solid rgba(255,255,255,.16)}
+.mk-glass td{padding:12px 18px;color:rgba(255,255,255,.8);border-bottom:1px solid rgba(255,255,255,.08)}
+.mk-glass tr:last-child td{border-bottom:0}
+.mk-glass td:first-child{color:#fff;font-weight:600}
+.mk-glass tr{transition:background .2s ease}
+.mk-glass tbody tr:hover{background:rgba(255,255,255,.06)}
+</style>
+
+<div class="mk-root mk-glass">
+  <div class="frame">
+    <div class="bar">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <div class="url">xlyk.github.io</div>
+      <div class="seg">
+        <button data-view="home" data-active>Home</button><button data-view="article">Article</button>
+      </div>
+    </div>
+    <div class="screen">
+      <div class="blobs"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="blob b4"></span></div>
+      <div class="grain"></div>
+      <div class="stage">
+
+        <div class="view view-home">
+          <header class="gnav">
+            <div class="brand">
+              <span class="logo"></span>
+              <span><b>Kyle's blog</b><span>Notes on AI engineering &amp; code</span></span>
+            </div>
+            <nav>
+              <a href="#" class="on">Home</a>
+              <a href="#">Archive</a>
+              <a href="#">Categories</a>
+              <a href="#">Search</a>
+            </nav>
+          </header>
+
+          <div class="wrap">
+            <section class="hero">
+              <h1>Kyle's blog</h1>
+              <p>Notes on AI engineering, code, and the tools in between.</p>
+              <span class="by"><span class="av"></span>Kyle Hanks</span>
+            </section>
+
+            <article class="card post">
+              <div class="pmeta">
+                <span class="chip cat">AI Engineering</span>
+                <span class="chip dot">Sep 20, 2025</span>
+              </div>
+              <h2><a href="#">Mastering Prompt Chaining with DSPy: A Structured Guide</a></h2>
+              <p class="sum">Moving beyond single-shot prompts: build and optimize prompt-chained LLM pipelines in DSPy — Signatures, Modules, Optimizers, and compilation, with practical Python examples.</p>
+              <div class="tags">
+                <span class="tag">dspy</span><span class="tag">prompt chaining</span><span class="tag">llm</span><span class="tag">optimization</span><span class="tag">python</span>
+              </div>
+            </article>
+
+            <article class="card post">
+              <div class="pmeta">
+                <span class="chip cat">General</span>
+                <span class="chip dot">Sep 20, 2025</span>
+              </div>
+              <h2><a href="#">Hello World</a></h2>
+              <p class="sum">First post on my Pelican-powered blog.</p>
+              <div class="tags">
+                <span class="tag">intro</span><span class="tag">pelican</span>
+              </div>
+            </article>
+          </div>
+
+          <footer class="gfoot">
+            <span>© 2026 Kyle Hanks — built with Pelican</span>
+            <span class="sp"><a href="#">RSS</a><a href="#">GitHub</a></span>
+          </footer>
+        </div>
+
+        <div class="view view-article" style="display:none">
+          <header class="gnav">
+            <div class="brand">
+              <span class="logo"></span>
+              <span><b>Kyle's blog</b><span>Notes on AI engineering &amp; code</span></span>
+            </div>
+            <nav>
+              <a href="#">Home</a>
+              <a href="#">Archive</a>
+              <a href="#">Categories</a>
+              <a href="#">Search</a>
+            </nav>
+          </header>
+
+          <div class="wrap">
+            <article class="art">
+              <h1>Mastering Prompt Chaining with DSPy: A Structured Guide</h1>
+              <div class="ameta">
+                <b>Sep 20, 2025</b><span class="d">·</span>AI Engineering<span class="d">·</span>9 min read<span class="d">·</span>tags: dspy, prompt chaining, llm, optimization, python
+              </div>
+
+              <nav class="toc">
+                <div class="tt">On this page</div>
+                <ol>
+                  <li>Introduction</li>
+                  <li>DSPy Core Concepts</li>
+                  <li>Signatures</li>
+                  <li>Modules</li>
+                  <li>Optimizers</li>
+                </ol>
+              </nav>
+
+              <p class="lead">Moving beyond simple, single-shot prompts is crucial for building sophisticated applications. DSPy, a framework from Stanford, replaces brittle manual prompt engineering with a systematic, programmatic approach — you define the logic and structure of a pipeline, and DSPy's optimizers find the most effective prompts.</p>
+
+              <h2>Introduction: Beyond Manual Prompting</h2>
+              <p>DSPy shifts development away from endless prompt tweaking toward a modular approach. Instead of fiddling with phrasing, you declare the inputs and outputs of each step and let the compiler optimize the prompts for a metric.</p>
+
+              <h2>DSPy Core Concepts</h2>
+              <p>The power of DSPy lies in a few components that compose into optimizable pipelines.</p>
+
+              <h3>1. Signatures: Defining the I/O</h3>
+              <p>A Signature is a declarative spec of a task's inputs and outputs. It separates the <i>what</i> from the <i>how</i>.</p>
+              <ul>
+                <li><b>Inputs</b> — what the module needs (e.g. question, context)</li>
+                <li><b>Outputs</b> — what it should produce (e.g. answer)</li>
+              </ul>
+
+              <div class="code">
+                <div class="ch"><i class="r"></i><i class="y"></i><i class="g"></i><span>basic_qa.py</span></div>
+<pre><span class="k">class</span> <span class="t">BasicQA</span>(dspy.<span class="t">Signature</span>):
+    <span class="c">"""Answer questions with short factoid answers."""</span>
+    question = dspy.<span class="f">InputField</span>(desc=<span class="s">"The question to answer"</span>)
+    answer = dspy.<span class="f">OutputField</span>(desc=<span class="s">"Often one word or a short phrase"</span>)</pre>
+              </div>
+
+              <blockquote><p>Don't tune prompts by hand. Define the pipeline, then compile it against a metric.</p></blockquote>
+
+              <h3>2. Modules: The Building Blocks</h3>
+              <p>Modules wrap Signatures with a prompting strategy — Predict, ChainOfThought, ReAct — and can be composed into larger programs.</p>
+
+              <div class="tbl">
+                <table>
+                  <thead><tr><th>Component</th><th>Role</th></tr></thead>
+                  <tbody>
+                    <tr><td>Signature</td><td>Declares inputs &amp; outputs</td></tr>
+                    <tr><td>Module</td><td>Building block with a strategy</td></tr>
+                    <tr><td>Optimizer</td><td>Tunes prompts against a metric</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </article>
+          </div>
+
+          <footer class="gfoot">
+            <span>© 2026 Kyle Hanks — built with Pelican</span>
+            <span class="sp"><a href="#">RSS</a><a href="#">GitHub</a></span>
+          </footer>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script>(function(){var r=document.querySelector('.mk-glass');if(!r)return;var bs=r.querySelectorAll('[data-view]');var vs=r.querySelectorAll('.view');bs.forEach(function(b){b.addEventListener('click',function(){var v=b.getAttribute('data-view');vs.forEach(function(e){e.style.display=e.classList.contains('view-'+v)?'':'none';});bs.forEach(function(x){x.removeAttribute('data-active');});b.setAttribute('data-active','');});});})();</script>

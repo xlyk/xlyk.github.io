@@ -1,5 +1,19 @@
 {% extends 'base.html' %}
 {% block title %}{{ article.title|striptags }} — {{ super() }}{% endblock %}
+{% block description %}{{ article.summary|striptags|truncate(160) }}{% endblock %}
 {% block content %}
-<article class="post"><h1>{{ article.title }}</h1><div class="post-content">{{ article.content }}</div></article>
+{% set words = article.content|striptags|wordcount %}
+{% set rt = ((words / 200) | round(0, 'ceil') | int) or 1 %}
+<article class="post">
+  <h1 class="glitch-title" data-txt="{{ article.title|striptags }}">{{ article.title }}</h1>
+  <p class="am00">
+    <b>{{ article.locale_date }}</b>
+    {% if article.category %}<span class="t2">·</span> {{ article.category }}{% endif %}
+    <span class="t2">·</span> <span class="reading-time">{{ rt }} min read</span>
+    {% if article.tags %}<span class="t2">·</span> tags: {% for tag in article.tags %}{{ tag }}{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}
+  </p>
+  <div class="post-content">
+    {{ article.content }}
+  </div>
+</article>
 {% endblock %}

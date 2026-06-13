@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-This is a Pelican-powered static blog hosted on GitHub Pages at https://xlyk.github.io. The site uses the Elegant theme (installed as a git submodule) and is automatically built and deployed via GitHub Actions when changes are pushed to the main branch. Python 3.13+ is required (`.python-version`, `requires-python` in `pyproject.toml`).
+This is a Pelican-powered static blog hosted on GitHub Pages at https://xlyk.github.io. The site uses a custom `Glitch` theme at `themes/glitch/` (a plain directory, not a submodule) and is automatically built and deployed via GitHub Actions when changes are pushed to the main branch. Python 3.13+ is required (`.python-version`, `requires-python` in `pyproject.toml`).
 
 There is no test suite. "Verification" means the three checks CI runs: `ruff check .`, `ruff format --check .`, and a clean `pelican` build with `publishconf.py`.
 
@@ -68,7 +68,7 @@ Post content goes here...
 - `publishconf.py` - Production configuration that imports from pelicanconf and overrides for GitHub Pages deployment
 - `content/` - Source content directory containing all posts, pages, and static files
 - `output/` - Generated static site (gitignored, auto-generated)
-- `themes/elegant` - Theme submodule providing templates and styling
+- `themes/glitch/` - Custom Glitch theme: `templates/` (Jinja2) + `static/css/` (`glitch.css`, `pygments-glitch.css`) + `static/js/glitch.js`. Vendored in-repo, not a submodule.
 
 ### Build Pipeline
 1. GitHub Actions workflow (`.github/workflows/pelican.yml`) triggers on push to main branch
@@ -77,10 +77,7 @@ Post content goes here...
 4. Deploys output directory to GitHub Pages
 
 ### Theme Management
-The Elegant theme is included as a git submodule. To update:
-```bash
-git submodule update --remote themes/elegant
-```
+The `Glitch` theme is a plain directory at `themes/glitch/` — no submodule, no init step. Edit templates in `themes/glitch/templates/` and styles in `themes/glitch/static/css/` directly. The full visual language lives in `static/css/glitch.css` (the class-name contract shared across templates); `static/css/pygments-glitch.css` maps Pygments token classes to the neon palette; `static/js/glitch.js` handles the `prefers-reduced-motion` guard and the client-side search. Search is dependency-free: the `searchindex` direct template emits `search-index.json`, and `glitch.js` filters it. The design spec and implementation plan are under `docs/superpowers/`; the original aesthetic mockups are in `design-mockups/`.
 
 ### Markdown Configuration
 The site uses enhanced Markdown processing with:
@@ -91,7 +88,7 @@ The site uses enhanced Markdown processing with:
 ### Static File Handling
 Files in `STATIC_PATHS` (`images/`, `extra/`) are copied directly to output. Use `EXTRA_PATH_METADATA` in pelicanconf.py to control output paths for special files like CNAME or robots.txt.
 
-Site styling overrides live in `content/extra/custom.css`, copied to `static/custom.css` and pulled in by the theme via `CUSTOM_CSS`. Put CSS tweaks there rather than editing the theme submodule.
+Site styling lives in the theme's `themes/glitch/static/css/glitch.css` and `pygments-glitch.css` — edit those for visual tweaks. (`content/extra/custom.css` is still copied to `static/custom.css` as an optional override hook but is not linked by the theme.)
 
 ### Production-only settings
 Sitemap generation (`pelican.plugins.sitemap`) and Atom feeds (`FEED_ALL_ATOM`, `CATEGORY_FEED_ATOM`) are defined only in `publishconf.py`. A dev build with `pelicanconf.py` produces neither — build with `publishconf.py` to exercise them locally.
@@ -99,5 +96,6 @@ Sitemap generation (`pelican.plugins.sitemap`) and Atom feeds (`FEED_ALL_ATOM`, 
 ## Gotchas
 
 - **`publishconf.py` needs the repo root importable.** It begins with `from pelicanconf import *`, so building with it requires the repo root on `PYTHONPATH`. From the repo root locally this usually resolves; CI sets `PYTHONPATH=$GITHUB_WORKSPACE` and passes an absolute path to `publishconf.py`. A `ModuleNotFoundError: pelicanconf` means the import path is wrong, not a missing dependency.
-- **Initialize the theme submodule after cloning.** Run `git submodule update --init --recursive`, or the build fails because `themes/elegant` is empty.
-- **Deployment serves the `output/` artifact, not the repo root.** The stray root-level `index.html` is vestigial and never published — editing it has no effect on the live site.
+- **The theme is vendored in-repo.** `themes/glitch/` is a normal directory — no `git submodule` init needed after cloning. (The old Elegant submodule may still be referenced in `.gitmodules`; it is no longer used by the build.)
+- **Direct templates need registering.** Non-article pages (search, the JSON search index, the 404) are Pelican `DIRECT_TEMPLATES` with matching `*_SAVE_AS` settings in `pelicanconf.py`. Adding a new standalone page means adding both the template and its `DIRECT_TEMPLATES` entry, or Pelican won't render it.
+- **Deployment serves the `output/` artifact, not the repo root.**

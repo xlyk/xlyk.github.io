@@ -33,9 +33,19 @@ EXTRA_PATH_METADATA = {
 THEME = "themes/glitch"  # Custom Glitch theme (plain directory, not a submodule)
 
 # Direct (non-article) templates the Glitch theme renders.
-DIRECT_TEMPLATES = ["index", "categories", "authors", "tags", "archives", "search", "searchindex"]
+DIRECT_TEMPLATES = [
+    "index",
+    "categories",
+    "authors",
+    "tags",
+    "archives",
+    "search",
+    "searchindex",
+    "notfound",
+]
 SEARCH_SAVE_AS = "search.html"
 SEARCHINDEX_SAVE_AS = "search-index.json"
+NOTFOUND_SAVE_AS = "404.html"
 
 # Dev convenience
 RELATIVE_URLS = True

@@ -1,0 +1,29 @@
+[project]
+name = "xlyk-blog"
+version = "0.0.0"
+description = "Pelican static blog hosted on GitHub Pages at https://xlyk.github.io"
+requires-python = ">=3.13"
+dependencies = [
+    "pelican[markdown]==4.12.0",
+    "markdown==3.10.2",
+    "typogrify==2.1.0",
+    "pelican-sitemap==1.2.2",
+]
+
+[dependency-groups]
+dev = [
+    "ruff==0.15.17",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+extend-exclude = ["themes", "output"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+# Pelican config files re-export settings via star imports.
+"publishconf.py" = ["F403", "F405"]
+"pelicanconf.py" = ["F403", "F405"]

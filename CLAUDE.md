@@ -1,38 +1,39 @@
-# WARP.md
-
-This file provides guidance to WARP (warp.dev) when working with code in this repository.
-
-## Repository Overview
-
 This is a Pelican-powered static blog hosted on GitHub Pages at https://xlyk.github.io. The site uses the Elegant theme (installed as a git submodule) and is automatically built and deployed via GitHub Actions when changes are pushed to the main branch.
 
 ## Essential Commands
 
 ### Development Environment Setup
+Dependencies are managed with [uv](https://docs.astral.dev/uv/) (`pyproject.toml` + `uv.lock`).
 ```bash
-# Activate the virtual environment
-source .venv/bin/activate
+# Create the virtual environment and install pinned dependencies
+uv sync
+```
 
-# Install dependencies (if needed)
-pip install "pelican[markdown]" typogrify
+### Linting
+Linting and formatting use [ruff](https://docs.astral.sh/ruff/) (config in `pyproject.toml`).
+```bash
+uv run ruff check .          # lint
+uv run ruff format .         # format
+uv run ruff check --fix .    # auto-fix lint issues
 ```
 
 ### Content Development
+Prefix commands with `uv run` to use the project environment.
 ```bash
 # Generate site with development settings (includes relative URLs)
-pelican content -o output -s pelicanconf.py
+uv run pelican content -o output -s pelicanconf.py
 
 # Generate site with production settings (absolute URLs for GitHub Pages)
-pelican content -o output -s publishconf.py
+uv run pelican content -o output -s publishconf.py
 
 # Run local development server
-pelican --listen --port 8000
+uv run pelican --listen --port 8000
 
 # Auto-regenerate on file changes during development
-pelican --autoreload --listen
+uv run pelican --autoreload --listen
 
 # Clean output directory before rebuilding
-pelican content -o output -s pelicanconf.py --delete-output-directory
+uv run pelican content -o output -s pelicanconf.py --delete-output-directory
 ```
 
 ### Content Management
@@ -64,8 +65,8 @@ Post content goes here...
 
 ### Build Pipeline
 1. GitHub Actions workflow (`.github/workflows/pelican.yml`) triggers on push to main branch
-2. Installs Python dependencies: `pelican[markdown]` and `typogrify`
-3. Builds site using `publishconf.py` settings
+2. Installs pinned dependencies with `uv sync --frozen` (from `uv.lock`)
+3. Runs `ruff` lint/format checks, then builds the site using `publishconf.py` settings
 4. Deploys output directory to GitHub Pages
 
 ### Theme Management

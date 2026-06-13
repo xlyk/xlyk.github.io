@@ -1,4 +1,3 @@
-import os
 from pelicanconf import *  # noqa: F401,F403
 
 SITEURL = "https://xlyk.github.io"
@@ -9,8 +8,9 @@ CATEGORY_FEED_ATOM = "feeds/{slug}.atom.xml"
 
 DELETE_OUTPUT_DIRECTORY = True
 
-# Production-only settings can go here (analytics, sitemaps, etc.)
-# Example for sitemap plugin if added later:
-# PLUGIN_PATHS = ["pelican-plugins"]
-# PLUGINS = ["sitemap"]
-# SITEMAP = {"format": "xml"}
+PLUGINS = ["pelican.plugins.sitemap"]
+SITEMAP = {
+    "format": "xml",
+    "priorities": {"articles": 0.7, "pages": 0.5, "indexes": 0.5},
+    "changefreqs": {"articles": "weekly", "pages": "monthly", "indexes": "daily"},
+}

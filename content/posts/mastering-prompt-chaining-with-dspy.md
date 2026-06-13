@@ -1,7 +1,7 @@
 Title: Mastering Prompt Chaining with DSPy: A Structured Guide
 Date: 2025-09-20 20:35
 Category: AI Engineering
-Tags: DSPy, prompt chaining, LLM, optimization, Python
+Tags: dspy, prompt chaining, llm, optimization, python
 Slug: mastering-prompt-chaining-with-dspy
 Summary: In the rapidly evolving landscape of AI development, moving beyond single-shot prompts is crucial. This guide shows how to build and optimize prompt-chained LLM pipelines in DSPy—covering Signatures, Modules, Optimizers, and compilation with practical Python examples.
 
@@ -11,22 +11,7 @@ In the rapidly evolving landscape of AI development, moving beyond simple, singl
 
 ### Table of Contents
 
-- [Introduction: Beyond Manual Prompting](#introduction-beyond-manual-prompting)
-- [DSPy Core Concepts](#dspy-core-concepts)
-  - [1. Signatures: Defining the I/O](#1-signatures-defining-the-io)
-  - [2. Modules: The Building Blocks](#2-modules-the-building-blocks)
-- [DSPy Setup and Configuration](#dspy-setup-and-configuration)
-- [The Power of Optimization: Compiling Your Program](#the-power-of-optimization-compiling-your-program)
-  - [Example: Optimizing with `BootstrapFewShot`](#example-optimizing-with-bootstrapfewshot)
-- [Prompt Chaining with DSPy](#prompt-chaining-with-dspy)
-  - [Simple Chains with `dspy.Predict`](#simple-chains-with-dspypredict)
-  - [Advanced Chains with `dspy.ChainOfThought`](#advanced-chains-with-dspychainofthought)
-  - [Building a Complex Custom Chain](#building-a-complex-custom-chain)
-- [Benefits and Practical Considerations](#benefits-and-practical-considerations)
-  - [Key Benefits of Using DSPy](#key-benefits-of-using-dspy)
-  - [Practical Considerations and Limitations](#practical-considerations-and-limitations)
-- [Key Takeaways](#key-takeaways)
-- [Conclusion](#conclusion)
+[TOC]
 
 ---
 

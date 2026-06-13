@@ -19,29 +19,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           submodules: true
-          fetch-depth: 0
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - name: Setup uv
+        uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6
         with:
-          python-version: "3.x"
+          enable-cache: true
       - name: Install dependencies
+        run: uv sync --frozen
+      - name: Lint
         run: |
-          python -m pip install --upgrade pip
-          pip install "pelican[markdown]" typogrify
+          uv run ruff check .
+          uv run ruff format --check .
       - name: Build site
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
-          pelican content -o output -s "$GITHUB_WORKSPACE/publishconf.py"
+          uv run pelican content -o output -s "$GITHUB_WORKSPACE/publishconf.py"
       - name: Disable Jekyll on Pages
         run: touch output/.nojekyll
       - name: Configure Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:
           path: ./output
 
@@ -54,4 +55,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

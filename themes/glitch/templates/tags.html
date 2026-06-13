@@ -1,4 +1,10 @@
 {% extends 'base.html' %}
+{% block title %}Tags — {{ super() }}{% endblock %}
 {% block content %}
-{% for tag, articles in tags %}<p><a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a> ({{ articles|length }})</p>{% endfor %}
+<h1 class="glitch-title" data-txt="TAGS">TAGS</h1>
+<div class="chips chips-index">
+  {% for tag, arts in tags|sort %}
+  <a class="chip" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }} <span class="count">{{ arts|length }}</span></a>
+  {% endfor %}
+</div>
 {% endblock %}

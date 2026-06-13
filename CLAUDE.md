@@ -1,4 +1,10 @@
-This is a Pelican-powered static blog hosted on GitHub Pages at https://xlyk.github.io. The site uses the Elegant theme (installed as a git submodule) and is automatically built and deployed via GitHub Actions when changes are pushed to the main branch.
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+This is a Pelican-powered static blog hosted on GitHub Pages at https://xlyk.github.io. The site uses the Elegant theme (installed as a git submodule) and is automatically built and deployed via GitHub Actions when changes are pushed to the main branch. Python 3.13+ is required (`.python-version`, `requires-python` in `pyproject.toml`).
+
+There is no test suite. "Verification" means the three checks CI runs: `ruff check .`, `ruff format --check .`, and a clean `pelican` build with `publishconf.py`.
 
 ## Essential Commands
 
@@ -16,6 +22,7 @@ uv run ruff check .          # lint
 uv run ruff format .         # format
 uv run ruff check --fix .    # auto-fix lint issues
 ```
+CI runs `ruff check .` **and** `ruff format --check .` — the build fails on unformatted code, so run `ruff format .` before pushing. The `themes/` and `output/` directories are excluded from linting (`extend-exclude` in `pyproject.toml`).
 
 ### Content Development
 Prefix commands with `uv run` to use the project environment.
@@ -83,3 +90,14 @@ The site uses enhanced Markdown processing with:
 
 ### Static File Handling
 Files in `STATIC_PATHS` (`images/`, `extra/`) are copied directly to output. Use `EXTRA_PATH_METADATA` in pelicanconf.py to control output paths for special files like CNAME or robots.txt.
+
+Site styling overrides live in `content/extra/custom.css`, copied to `static/custom.css` and pulled in by the theme via `CUSTOM_CSS`. Put CSS tweaks there rather than editing the theme submodule.
+
+### Production-only settings
+Sitemap generation (`pelican.plugins.sitemap`) and Atom feeds (`FEED_ALL_ATOM`, `CATEGORY_FEED_ATOM`) are defined only in `publishconf.py`. A dev build with `pelicanconf.py` produces neither — build with `publishconf.py` to exercise them locally.
+
+## Gotchas
+
+- **`publishconf.py` needs the repo root importable.** It begins with `from pelicanconf import *`, so building with it requires the repo root on `PYTHONPATH`. From the repo root locally this usually resolves; CI sets `PYTHONPATH=$GITHUB_WORKSPACE` and passes an absolute path to `publishconf.py`. A `ModuleNotFoundError: pelicanconf` means the import path is wrong, not a missing dependency.
+- **Initialize the theme submodule after cloning.** Run `git submodule update --init --recursive`, or the build fails because `themes/elegant` is empty.
+- **Deployment serves the `output/` artifact, not the repo root.** The stray root-level `index.html` is vestigial and never published — editing it has no effect on the live site.

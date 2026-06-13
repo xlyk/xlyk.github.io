@@ -1,0 +1,21 @@
+{% macro post_card(article) %}
+<article class="card">
+  <div class="pmeta">
+    <span class="ts">{{ article.locale_date }}</span>
+    {% if article.category %}<span class="cat">{{ article.category }}</span>{% endif %}
+  </div>
+  <h2 class="card-title glitch-title" data-txt="{{ article.title|striptags }}"><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h2>
+  {% if article.summary %}<p class="sum">{{ article.summary|striptags }}</p>{% endif %}
+  {% if article.tags %}<div class="chips">{% for tag in article.tags %}<a class="chip" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>{% endfor %}</div>{% endif %}
+</article>
+{% endmacro %}
+
+{% macro pagination(page) %}
+{% if page and (page.has_previous or page.has_next) %}
+<nav class="pager" aria-label="Pagination">
+  {% if page.has_previous %}<a class="pager-prev" href="{{ SITEURL }}/{{ articles_previous_page.url }}">&larr; newer</a>{% endif %}
+  <span class="pager-pos">page {{ page.number }} / {{ page.paginator.num_pages }}</span>
+  {% if page.has_next %}<a class="pager-next" href="{{ SITEURL }}/{{ articles_next_page.url }}">older &rarr;</a>{% endif %}
+</nav>
+{% endif %}
+{% endmacro %}

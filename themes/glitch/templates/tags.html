@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for tag, articles in tags %}<p><a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a> ({{ articles|length }})</p>{% endfor %}
+{% endblock %}

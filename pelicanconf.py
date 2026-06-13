@@ -30,8 +30,10 @@ EXTRA_PATH_METADATA = {
     "extra/custom.css": {"path": "static/custom.css"},
 }
 
-THEME = "themes/elegant"  # Using Elegant theme
-CUSTOM_CSS = "static/custom.css"  # Elegant will include this CSS if provided
+THEME = "themes/glitch"  # Custom Glitch theme (plain directory, not a submodule)
+
+# Direct (non-article) templates the Glitch theme renders.
+DIRECT_TEMPLATES = ["index", "categories", "authors", "tags", "archives"]
 
 # Dev convenience
 RELATIVE_URLS = True

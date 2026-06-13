@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="{{ DEFAULT_LANG }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ SITENAME|striptags }}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{{ SITESUBTITLE|default('Notes on AI engineering, code, and the tools in between.') }}{% endblock %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap">
+  <link rel="stylesheet" href="{{ SITEURL }}/theme/css/glitch.css">
+  <link rel="stylesheet" href="{{ SITEURL }}/theme/css/pygments-glitch.css">
+  {% if FEED_ALL_ATOM %}<link rel="alternate" type="application/atom+xml" title="{{ SITENAME }} Atom" href="{{ SITEURL }}/{{ FEED_ALL_ATOM }}">{% endif %}
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  <div class="fx-scanlines" aria-hidden="true"></div>
+  <div class="fx-noise" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">skip to content</a>
+  {% include '_includes/nav.html' %}
+  <main id="main" class="wrap">
+    {% block content %}{% endblock %}
+  </main>
+  {% include '_includes/footer.html' %}
+  <script src="{{ SITEURL }}/theme/js/glitch.js" defer></script>
+</body>
+</html>

@@ -1,11 +1,11 @@
-Title: Adding Ollama Cloud Models to Obsidian Copilot by Editing data.json
+Title: Configuring Obsidian Copilot Models by Editing data.json
 Date: 2026-06-13 01:29
 Category: AI Engineering
 Tags: obsidian, copilot, ollama, local ai, debugging
 Slug: obsidian-copilot-ollama-cloud-models
-Summary: Adding Ollama Cloud models to the Obsidian Copilot plugin by editing its data.json: finding the active vault's config, duplicating a model entry, and verifying tags with ollama show.
+Summary: How to configure the Obsidian Copilot plugin's models by editing data.json directly instead of the GUI. Works for any provider; shown here with a batch of Ollama Cloud models.
 
-I wanted to add eleven Ollama Cloud models to the Obsidian Copilot plugin. Its settings screen adds them one at a time, so I edited the config file directly. Two things needed care: finding the file Obsidian actually loads, and matching each Ollama tag exactly.
+Obsidian Copilot keeps its model configuration in a JSON file, and editing that file directly beats clicking through the settings GUI for any bulk change. Because each model entry just names a `provider`, the same approach works whatever you run: OpenAI, Anthropic, a local server, or Ollama Cloud. I used it to add a batch of Ollama Cloud models at once. Two things needed care: finding the file Obsidian actually loads, and getting each model name right.
 
 ## Finding the active vault
 
@@ -63,11 +63,11 @@ Chat models go in `activeModels`, embeddings in `activeEmbeddingModels`; `defaul
 }
 ```
 
-`_keychainOnly` was `true` and every `apiKey` field was empty: API keys live in the macOS Keychain, not the JSON, so editing the file never touches them.
+The `provider` field is what makes this general: set it to `ollama`, `openai`, `anthropic`, and so on, and Copilot routes the model accordingly. `_keychainOnly` was `true` and every `apiKey` field was empty: the keys live in the macOS Keychain, not the JSON, so editing the file never touches them.
 
 ## Adding the models
 
-I duplicated the `minimax-m3:cloud` entry for each of these:
+My example was a batch of Ollama Cloud models, duplicating the existing `minimax-m3:cloud` entry for each of these:
 
 ```text
 deepseek-v4-flash
@@ -83,11 +83,11 @@ nemotron-3-ultra
 qwen3.5
 ```
 
-Most Ollama Cloud models use a plain `:cloud` suffix, so I appended it to every name. Two failed: `gemma4` and `gpt-oss` returned "not found". Copilot passes `name` straight to Ollama, so each tag must match an existing model exactly.
+Most Ollama Cloud models use a plain `:cloud` suffix, so I appended it to every name. Two failed: `gemma4` and `gpt-oss` returned "not found". Copilot passes `name` straight through to the provider, so each one has to match a model that provider actually serves.
 
-## Verifying the model tags
+## Verifying the model names
 
-`ollama show` prints a model's details and errors on an unknown tag:
+Whatever the provider, verify the names before trusting them: a typo fails quietly in the config and loudly at request time. For Ollama, `ollama show` prints a model's details and errors on an unknown tag:
 
 ```bash
 ollama show "<model-name>"
@@ -125,5 +125,5 @@ If Obsidian is open while you edit, it can overwrite the file with its in-memory
 2. Back up `data.json` with a timestamp.
 3. Edit only the `activeModels` array.
 4. Validate the JSON with `jq`.
-5. Confirm each tag with `ollama show`.
+5. Confirm each model name with the provider (`ollama show`, the provider's model list, and so on).
 6. Restart Obsidian so the plugin reloads the file.

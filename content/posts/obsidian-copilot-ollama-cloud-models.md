@@ -3,31 +3,27 @@ Date: 2026-06-13 01:29
 Category: AI Engineering
 Tags: obsidian, copilot, ollama, ollama cloud, ai configuration, debugging
 Slug: obsidian-copilot-ollama-cloud-models
-Summary: How to bulk-add Obsidian Copilot models by editing data.json and verifying model tags before using them.
+Summary: Bulk-add Obsidian Copilot models by editing data.json and checking model tags.
 
-Obsidian Copilot lets you add models through its settings screen. That works fine for one or two models. It gets tedious when you want to add a batch.
+Adding one model through Copilot's settings is fine. Adding a batch is tedious.
 
-Copilot stores the model list in your vault:
+Copilot stores the model list here:
 
 ```text
 <vault>/.obsidian/plugins/copilot/data.json
 ```
 
-You can edit that file directly: quit Obsidian, back up the file, duplicate a working entry, verify the model tags, validate the JSON, then reopen Obsidian and test one model.
+The workflow: close Obsidian, back up `data.json`, copy a working entry, change the model name, validate JSON, reopen Obsidian.
 
-I used this to add several Ollama Cloud models. The same pattern can work for other providers, but start from a model that already works in Copilot.
-
-## Find the right file
-
-If you are not sure which vault Obsidian opens, check Obsidian's app registry on macOS:
+If you are not sure which vault Obsidian opens, check the macOS app registry:
 
 ```text
 ~/Library/Application Support/obsidian/obsidian.json
 ```
 
-## Back up before editing
+## Back up and validate
 
-I backed up `data.json`, edited it while Obsidian was closed, then checked it with `jq`:
+I copied `data.json` to a timestamped backup and checked both versions with `jq empty`:
 
 ```bash
 cp ".obsidian/plugins/copilot/data.json" \
@@ -36,31 +32,11 @@ cp ".obsidian/plugins/copilot/data.json" \
 jq empty ".obsidian/plugins/copilot/data.json"
 ```
 
-Run the same `jq` check after editing.
+## Edit activeModels
 
-## Edit the model list
+Chat models live in `activeModels`. I duplicated an existing Ollama entry and changed `name` to the new model tag.
 
-Chat models go in `activeModels`:
-
-```json
-{
-  "activeModels": []
-}
-```
-
-## Duplicate a working entry
-
-I copied an existing working Ollama entry and changed the model name:
-
-```json
-{
-  "name": "minimax-m3:cloud",
-  "provider": "ollama",
-  "enabled": true
-}
-```
-
-## Verify the model tags
+## Verify the tags
 
 For Ollama, check a tag with:
 
@@ -70,10 +46,6 @@ ollama show "<model-name>"
 
 I first guessed that every Ollama Cloud model used a plain `:cloud` suffix. Most did. Two needed explicit sizes: `gemma4:31b-cloud` and `gpt-oss:20b-cloud`.
 
-## Reopen and test
+## Reopen Obsidian
 
-After reopening Obsidian, the models appeared in Copilot's picker. I tested one with a short prompt:
-
-```text
-Reply with exactly: ok
-```
+After reopening Obsidian, the new models appeared in Copilot's picker and answered a test prompt.

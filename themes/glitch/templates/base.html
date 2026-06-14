@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08080d">
   <title>{% block title %}{{ SITENAME|striptags }}{% endblock %}</title>
-  <meta name="description" content="{% block description %}{{ SITESUBTITLE|default('Notes on AI engineering, code, and the tools in between.') }}{% endblock %}">
+  <meta name="description" content="{% block description %}{{ SITESUBTITLE|default('Notes on AI engineering, code, and tooling.') }}{% endblock %}">
   <link rel="icon" href="{{ SITEURL }}/theme/img/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="{{ SITEURL }}/theme/fonts/vt323.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{ SITEURL }}/theme/fonts/share-tech-mono.woff2" as="font" type="font/woff2" crossorigin>
@@ -19,7 +19,7 @@
   {% block opengraph %}
   <meta property="og:type" content="website">
   <meta property="og:title" content="{{ SITENAME|striptags }}">
-  <meta property="og:description" content="{{ SITESUBTITLE|default('Notes on AI engineering, code, and the tools in between.') }}">
+  <meta property="og:description" content="{{ SITESUBTITLE|default('Notes on AI engineering, code, and tooling.') }}">
   <meta property="og:url" content="{{ SITEURL }}/">
   <meta name="twitter:card" content="summary">
   {% endblock %}

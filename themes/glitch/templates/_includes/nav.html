@@ -6,11 +6,13 @@
   </div>
   <nav class="term" aria-label="Primary">
     <span class="ps1">guest@blog:~$</span>
-    <a href="{{ SITEURL }}/">home</a>
-    <a href="{{ SITEURL }}/{{ ARCHIVES_SAVE_AS|default('archives.html') }}">archive</a>
-    <a href="{{ SITEURL }}/{{ CATEGORIES_SAVE_AS|default('categories.html') }}">categories</a>
-    <a href="{{ SITEURL }}/{{ TAGS_SAVE_AS|default('tags.html') }}">tags</a>
-    <a href="{{ SITEURL }}/search.html">search</a>
+    <span class="nav-links">
+      <a href="{{ SITEURL }}/">home</a>
+      <a href="{{ SITEURL }}/{{ ARCHIVES_SAVE_AS|default('archives.html') }}">archive</a>
+      <a href="{{ SITEURL }}/{{ CATEGORIES_SAVE_AS|default('categories.html') }}">categories</a>
+      <a href="{{ SITEURL }}/{{ TAGS_SAVE_AS|default('tags.html') }}">tags</a>
+      <a href="{{ SITEURL }}/search.html">search</a>
+    </span>
     <span class="cur" aria-hidden="true"></span>
   </nav>
 </header>

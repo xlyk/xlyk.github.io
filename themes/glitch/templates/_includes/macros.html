@@ -6,7 +6,14 @@
   </div>
   <h2 class="card-title glitch-title" data-txt="{{ article.title|striptags }}"><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h2>
   {% if article.summary %}<p class="sum">{{ article.summary|striptags }}</p>{% endif %}
-  {% if article.tags %}<div class="chips">{% for tag in article.tags %}<a class="chip" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>{% endfor %}</div>{% endif %}
+  {% if article.tags %}
+  {% set visible_tags = article.tags[:4] %}
+  {% set hidden_tag_count = article.tags|length - visible_tags|length %}
+  <div class="chips">
+    {% for tag in visible_tags %}<a class="chip" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>{% endfor %}
+    {% if hidden_tag_count > 0 %}<span class="chip chip-more">+{{ hidden_tag_count }} more</span>{% endif %}
+  </div>
+  {% endif %}
 </article>
 {% endmacro %}
 

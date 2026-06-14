@@ -47,4 +47,10 @@
   </div>
   {% endif %}
 </article>
+{% if article.older_article or article.newer_article %}
+<nav class="post-nav" aria-label="More posts">
+  {% if article.newer_article %}<a class="pn pn-newer" href="{{ SITEURL }}/{{ article.newer_article.url }}"><span class="pn-dir">← newer</span><span class="pn-title">{{ article.newer_article.title|striptags }}</span></a>{% else %}<span class="pn-empty"></span>{% endif %}
+  {% if article.older_article %}<a class="pn pn-older" href="{{ SITEURL }}/{{ article.older_article.url }}"><span class="pn-dir">older →</span><span class="pn-title">{{ article.older_article.title|striptags }}</span></a>{% else %}<span class="pn-empty"></span>{% endif %}
+</nav>
+{% endif %}
 {% endblock %}

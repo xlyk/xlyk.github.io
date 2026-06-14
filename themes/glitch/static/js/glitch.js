@@ -42,6 +42,13 @@
         });
         var tools = document.createElement('div');
         tools.className = 'code-tools';
+        var lang = block.getAttribute('data-lang');
+        if (lang) {
+          var label = document.createElement('span');
+          label.className = 'code-lang';
+          label.textContent = lang;
+          tools.appendChild(label);
+        }
         tools.appendChild(btn);
         block.appendChild(tools);
       })(blocks[i]);

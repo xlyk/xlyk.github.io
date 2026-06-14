@@ -8,7 +8,7 @@ CATEGORY_FEED_ATOM = "feeds/{slug}.atom.xml"
 
 DELETE_OUTPUT_DIRECTORY = True
 
-PLUGINS = ["pelican.plugins.sitemap"]
+PLUGINS = [*PLUGINS, "pelican.plugins.sitemap"]  # extend local plugins from pelicanconf
 SITEMAP = {
     "format": "xml",
     "priorities": {"articles": 0.7, "pages": 0.5, "indexes": 0.5},

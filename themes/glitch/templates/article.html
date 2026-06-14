@@ -1,6 +1,33 @@
 {% extends 'base.html' %}
 {% block title %}{{ article.title|striptags }} — {{ super() }}{% endblock %}
 {% block description %}{{ article.summary|striptags|truncate(160) }}{% endblock %}
+{% block canonical %}<link rel="canonical" href="{{ SITEURL }}/{{ article.url }}">{% endblock %}
+{% block opengraph %}
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{ article.title|striptags }}">
+  <meta property="og:description" content="{{ article.summary|striptags|truncate(200) }}">
+  <meta property="og:url" content="{{ SITEURL }}/{{ article.url }}">
+  <meta property="article:published_time" content="{{ article.date.isoformat() }}">
+  {% if article.category %}<meta property="article:section" content="{{ article.category }}">{% endif %}
+  {% for tag in article.tags %}<meta property="article:tag" content="{{ tag }}">{% endfor %}
+  <meta name="twitter:card" content="summary">
+{% endblock %}
+{% block extra_head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ article.title|striptags|tojson }},
+  "datePublished": "{{ article.date.isoformat() }}",
+  {% if article.modified %}"dateModified": "{{ article.modified.isoformat() }}",{% endif %}
+  "author": {"@type": "Person", "name": {{ article.author|default(AUTHOR)|string|tojson }}},
+  "url": "{{ SITEURL }}/{{ article.url }}",
+  "mainEntityOfPage": "{{ SITEURL }}/{{ article.url }}",
+  "description": {{ article.summary|striptags|tojson }}{% if article.category %},
+  "articleSection": {{ article.category|string|tojson }}{% endif %}
+}
+</script>
+{% endblock %}
 {% block content %}
 {% set words = article.content|striptags|wordcount %}
 {% set rt = ((words / 200) | round(0, 'ceil') | int) or 1 %}
@@ -10,10 +37,14 @@
     <b>{{ article.locale_date }}</b>
     {% if article.category %}<span class="t2">·</span> {{ article.category }}{% endif %}
     <span class="t2">·</span> <span class="reading-time">{{ rt }} min read</span>
-    {% if article.tags %}<span class="t2">·</span> tags: {% for tag in article.tags %}{{ tag }}{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}
   </p>
   <div class="post-content">
     {{ article.content }}
   </div>
+  {% if article.tags %}
+  <div class="chips post-tags">
+    {% for tag in article.tags %}<a class="chip" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>{% endfor %}
+  </div>
+  {% endif %}
 </article>
 {% endblock %}

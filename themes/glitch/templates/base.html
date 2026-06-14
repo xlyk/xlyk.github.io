@@ -3,14 +3,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08080d">
   <title>{% block title %}{{ SITENAME|striptags }}{% endblock %}</title>
   <meta name="description" content="{% block description %}{{ SITESUBTITLE|default('Notes on AI engineering, code, and the tools in between.') }}{% endblock %}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap">
+  <link rel="icon" href="{{ SITEURL }}/theme/img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="{{ SITEURL }}/theme/fonts/vt323.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ SITEURL }}/theme/fonts/share-tech-mono.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ SITEURL }}/theme/css/glitch.css">
   <link rel="stylesheet" href="{{ SITEURL }}/theme/css/pygments-glitch.css">
   {% if FEED_ALL_ATOM %}<link rel="alternate" type="application/atom+xml" title="{{ SITENAME }} Atom" href="{{ SITEURL }}/{{ FEED_ALL_ATOM }}">{% endif %}
+  <meta property="og:site_name" content="{{ SITENAME|striptags }}">
+  <meta property="og:locale" content="en_US">
+  {% block canonical %}{% endblock %}
+  {% block opengraph %}
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ SITENAME|striptags }}">
+  <meta property="og:description" content="{{ SITESUBTITLE|default('Notes on AI engineering, code, and the tools in between.') }}">
+  <meta property="og:url" content="{{ SITEURL }}/">
+  <meta name="twitter:card" content="summary">
+  {% endblock %}
   {% block extra_head %}{% endblock %}
 </head>
 <body>

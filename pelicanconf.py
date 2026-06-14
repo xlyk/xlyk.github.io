@@ -34,7 +34,7 @@ THEME = "themes/glitch"  # Custom Glitch theme (plain directory, not a submodule
 
 # Local (vendored) plugins live in plugins/ — no external dependencies.
 PLUGIN_PATHS = ["plugins"]
-PLUGINS = ["neighbors", "code_lang_labels"]
+PLUGINS = ["neighbors", "code_lang_labels", "sitemeta"]
 
 # Direct (non-article) templates the Glitch theme renders.
 DIRECT_TEMPLATES = [

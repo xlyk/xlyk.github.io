@@ -4,7 +4,7 @@
 <section class="hero">
   <h1 class="glitch-title" data-txt="{{ SITENAME|striptags }}">{{ SITENAME }}</h1>
   <p class="tag">{{ SITESUBTITLE|default('Notes on AI engineering, code, and the tools in between.') }}</p>
-  <p class="auth">authored_by <b>{{ AUTHOR }}</b> &nbsp;|&nbsp; uplink stable<span class="grn">_</span></p>
+  <p class="auth">authored_by <b>{{ AUTHOR }}</b> · est. 2025<span class="grn">_</span></p>
 </section>
 <p class="sectionlabel">LATEST_TRANSMISSIONS{% if articles_paginator %} — page {{ articles_page.number }} / {{ articles_paginator.num_pages }}{% endif %}</p>
 {% for article in (articles_page.object_list if articles_page else articles) %}

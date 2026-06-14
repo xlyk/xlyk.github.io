@@ -1,11 +1,11 @@
 <header class="site-head">
   <div class="status-bar">
-    <span class="hex">0x4B59 // 01001011</span>
-    <span class="sig">▓ SIGNAL_ACQUIRED</span>
-    <span class="ok">● CRT_LINK OK</span>
+    <span class="sb-host">{{ SITE_HOST }}</span>
+    <span class="sb-count">{{ POST_COUNT }} post{{ 's' if POST_COUNT != 1 else '' }}</span>
+    <span class="sb-updated"><span class="dot">●</span> updated {{ LAST_UPDATED }}</span>
   </div>
   <nav class="term" aria-label="Primary">
-    <span class="ps1">guest@xlyk:~$</span>
+    <span class="ps1">guest@blog:~$</span>
     <a href="{{ SITEURL }}/">home</a>
     <a href="{{ SITEURL }}/{{ ARCHIVES_SAVE_AS|default('archives.html') }}">archive</a>
     <a href="{{ SITEURL }}/{{ CATEGORIES_SAVE_AS|default('categories.html') }}">categories</a>

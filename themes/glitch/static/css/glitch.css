@@ -184,7 +184,9 @@ nav.term a[aria-current="page"]::before{ content:"> "; color:var(--grn); }
 
 /* ===== Footer ===== */
 footer.site-foot{ position:relative; z-index:4; max-width:820px; margin:14px auto 0; padding:16px 24px 30px; border-top:1px dashed rgba(255,32,121,.3); font-size:12px; color:var(--dim); display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+footer.site-foot .foot-meta{ display:flex; flex-direction:column; gap:3px; }
 footer.site-foot .glitchtxt{ color:var(--mag); }
+footer.site-foot .skill-credit{ color:rgba(216,216,240,.68); }
 footer.site-foot a{ color:var(--cyan); text-decoration:none; }
 footer.site-foot a:hover{ color:var(--cyan2); text-shadow:1px 0 var(--mag); }
 footer.site-foot .links{ display:flex; gap:14px; }

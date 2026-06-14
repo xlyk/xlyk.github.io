@@ -1,112 +1,93 @@
-Title: Bulk-add models to Obsidian Copilot by editing data.json
+Title: Bulk-add Obsidian Copilot models in data.json
 Date: 2026-06-13 01:29
 Category: AI Engineering
 Tags: obsidian, copilot, ollama, ollama cloud, ai configuration, debugging
 Slug: obsidian-copilot-ollama-cloud-models
-Summary: A safe workflow for bulk-adding Obsidian Copilot models by editing data.json directly: quit Obsidian, back up the config, duplicate a working provider entry, verify model tags, and test the result.
+Summary: How to bulk-add Obsidian Copilot models by editing data.json without losing changes or trusting bad model tags.
 
-Obsidian Copilot's settings UI is fine for adding one or two models. If you want to add a batch of models, the repeated clicking gets old fast.
+Obsidian Copilot lets you add models through its settings screen. That works fine for one or two models. It gets tedious when you want to add a batch.
 
-Copilot stores its model list in a JSON file inside your vault:
+Copilot stores the model list in your vault:
 
 ```text
 <vault>/.obsidian/plugins/copilot/data.json
 ```
 
-You can edit that file directly, but treat it like a small config migration: quit Obsidian first, back up the file, duplicate a known-working entry, verify the model tags, validate the JSON, then reopen Obsidian and test the result.
+You can edit that file directly. Do it carefully: quit Obsidian, back up the file, duplicate a working entry, verify the model tags, validate the JSON, then reopen Obsidian and test one model.
 
-This post uses Ollama Cloud models as the example, but the safer lesson is more general: when you already have one working provider entry, you can often duplicate it and change only the model-specific fields.
+I used this to add several Ollama Cloud models. The same pattern can work for other providers, but do not invent provider entries from scratch. Start from a model that already works in Copilot.
 
-## When to use this
+One caveat before the steps: Ollama Cloud is not local inference. It uses Ollama's tooling, but the model runs in the cloud. If you want fully local/private AI, use local Ollama models instead of `:cloud` models.
 
-Use the Copilot settings UI if you only need to add one model. It is safer and easier.
+## Use this only for bulk edits
 
-Edit `data.json` directly when:
+Use Copilot's settings UI if you only need one model. It is safer and faster.
 
-- you want to add or update several models at once;
-- you already have at least one working model for the same provider;
-- you are comfortable restoring a JSON backup if something breaks;
-- you can quit Obsidian while editing the file.
+Edit `data.json` when:
 
-Do not use this method if Obsidian Sync or another sync tool is actively modifying the vault, if you are not sure which vault you are editing, or if you are not comfortable recovering from a bad JSON edit.
+- you need to add or update several models;
+- you already have one working model for the same provider;
+- you know which vault Copilot is using;
+- you can restore a JSON backup if the edit breaks.
 
-One more caveat: Ollama Cloud models use Ollama's tooling/API, but they are not local inference. If your goal is fully local/private AI, use local Ollama models instead of `:cloud` models.
+Do not edit the file while Obsidian is open. Copilot can write its in-memory settings back to disk and wipe out your changes.
 
-## The safe workflow
+## Find the right file
 
-The order matters.
+If you know your vault path, go straight to:
 
-1. Quit Obsidian completely.
-2. Find the vault you want to edit.
-3. Back up Copilot's `data.json`.
-4. Duplicate a working model entry for the same provider.
-5. Change only the fields you need.
-6. Validate the JSON.
-7. Reopen Obsidian.
-8. Confirm the models appear in Copilot.
-9. Send a small test prompt to at least one new model.
+```text
+<vault>/.obsidian/plugins/copilot/data.json
+```
 
-If you edit while Obsidian is open, Copilot can rewrite the file from memory and discard your changes when the app exits or reloads.
+If you are not sure which vault Obsidian opens, check Obsidian's app registry.
 
-## Find the right vault
-
-If you already know the vault path, skip this section.
-
-Obsidian keeps app-level state separately from per-vault settings. On macOS, the app registry lives here:
+macOS:
 
 ```text
 ~/Library/Application Support/obsidian/obsidian.json
 ```
 
-Other common locations:
+Windows:
 
 ```text
-Windows: %APPDATA%\Obsidian\obsidian.json
-Linux:   ~/.config/obsidian/obsidian.json
+%APPDATA%\Obsidian\obsidian.json
 ```
 
-That registry can help when you have multiple similarly named vaults. In my case, I had two near-duplicates and wanted the one Obsidian was actually opening.
-
-Once you have the vault path, Copilot's config is inside the vault:
+Linux:
 
 ```text
-<vault>/.obsidian/plugins/copilot/data.json
+~/.config/obsidian/obsidian.json
 ```
 
-If your plugin folder has a slightly different name, check:
+I had two similarly named vaults. The registry made it clear which one I needed.
 
-```text
-<vault>/.obsidian/plugins/
-```
+## Back up before editing
 
-and look for the Copilot plugin directory.
-
-## Back up data.json
-
-From the vault root:
+Quit Obsidian first. Then, from the vault root:
 
 ```bash
 cp ".obsidian/plugins/copilot/data.json" \
-   ".obsidian/plugins/copilot/data.json.backup.$(date +%Y%m%d-%H%M%S)"
+  ".obsidian/plugins/copilot/data.json.backup.$(date +%Y%m%d-%H%M%S)"
 ```
 
-Then make sure the current file is valid JSON before editing:
+Check that the current file parses:
 
 ```bash
 jq empty ".obsidian/plugins/copilot/data.json"
 ```
 
-If you do not have `jq`, Python works too:
+If you do not have `jq`, use Python:
 
 ```bash
 python -m json.tool ".obsidian/plugins/copilot/data.json" >/dev/null
 ```
 
-Do this before and after the edit. It only checks JSON syntax, not whether Copilot likes the settings, but it catches the easy mistakes.
+Run the same check after editing.
 
-## The fields that matter
+## Edit the model list
 
-Copilot's `data.json` contains more than model settings. The model-related fields I cared about were:
+The important model fields live here:
 
 ```json
 {
@@ -119,25 +100,25 @@ Copilot's `data.json` contains more than model settings. The model-related field
 
 Chat models go in `activeModels`. Embedding models go in `activeEmbeddingModels`.
 
-Defaults use this shape:
+Defaults use this format:
 
 ```text
 <model>|<provider>
 ```
 
-For example:
+Example:
 
 ```text
 minimax-m3:cloud|ollama
 ```
 
-If you only add models, you may not need to touch `defaultModelKey`. If you want one of the new models to be the default, update it after the new model entry exists.
+If you only add models, leave `defaultModelKey` alone. Change it only if you want one of the new models to become the default.
 
-## Duplicate a working provider entry
+## Duplicate a working entry
 
-The safest way to add models is not to invent a new object from scratch. First create one working model through Copilot's settings UI, then duplicate that entry in `data.json`.
+Do not build a new model object by hand. Create one working model through Copilot's UI, then duplicate that object in `data.json`.
 
-Here is the kind of entry I started from:
+This was my starting point:
 
 ```json
 {
@@ -155,11 +136,7 @@ Here is the kind of entry I started from:
 }
 ```
 
-In my config, `_keychainOnly` was `true` and the `apiKey` fields were empty, so the API keys lived outside this JSON file. Do not assume that is true for your setup. Check your own `apiKey` fields before backing up, syncing, sharing, or committing this file.
-
-Also do not blindly copy every model-specific field. Fields like `capabilities`, `reasoningEffort`, `stream`, and `numCtx` may be wrong for another model. Start with the smallest change that works: duplicate a known-good entry for the same provider and change the model name first.
-
-For an Ollama model, the two fields that must line up are:
+For Ollama, the key fields are:
 
 ```json
 {
@@ -168,41 +145,45 @@ For an Ollama model, the two fields that must line up are:
 }
 ```
 
-The model name is passed through to Ollama. If the tag is wrong, Copilot may still load the config, but the request will fail when you try to use the model.
+The `name` must match a model tag Ollama recognizes.
 
-## Verify model names before trusting them
+Do not blindly copy model-specific fields like `capabilities`, `numCtx`, `stream`, or `reasoningEffort`. They may be wrong for another model. Copy the shape from a working entry, then change as little as possible.
 
-Most failures come from model tags that look plausible but are not the exact IDs the provider expects.
+Also check your API key fields. In my config, `_keychainOnly` was `true`, and the `apiKey` fields were empty. That means my keys lived outside `data.json`. Do not assume your setup is the same. Never share or commit this file without checking for secrets.
 
-For Ollama, check the tag before relying on it:
+## Verify the model tags
+
+Most failures come from plausible-looking model names that are not exact tags.
+
+For Ollama, check a tag with:
 
 ```bash
 ollama show "<model-name>"
 ```
 
-You can also test with:
+You can also run it directly:
 
 ```bash
 ollama run "<model-name>"
 ```
 
-My first pass used a plain `:cloud` suffix for every Ollama Cloud model. Most worked. Two did not.
+I first guessed that every Ollama Cloud model used a plain `:cloud` suffix. Most did. Two did not.
 
-Wrong guesses:
+Wrong:
 
 ```text
 gemma4:cloud
 gpt-oss:cloud
 ```
 
-Correct tags from my test:
+Correct:
 
 ```text
 gemma4:31b-cloud
 gpt-oss:20b-cloud
 ```
 
-The corrected set I used:
+Here is the set I used:
 
 ```text
 minimax-m3:cloud
@@ -219,129 +200,52 @@ nemotron-3-ultra:cloud
 qwen3.5:cloud
 ```
 
-Treat that list as a snapshot, not a canonical catalog. Cloud model availability and naming can change. Verify current tags with Ollama before assuming they still work.
+Treat that list as a snapshot. Cloud catalogs change. Verify the tags before using them.
 
-## Validate before reopening Obsidian
+## Reopen and test
 
-After editing:
+After editing, validate the file again:
 
 ```bash
 jq empty ".obsidian/plugins/copilot/data.json"
 ```
 
-or:
+Then reopen Obsidian and check Copilot.
 
-```bash
-python -m json.tool ".obsidian/plugins/copilot/data.json" >/dev/null
-```
+Confirm that:
 
-Then check the basics:
+- Copilot settings still load;
+- the new models appear in the model picker;
+- the old default model still works;
+- one new model answers a small test prompt.
 
-```text
-- Obsidian is still closed.
-- data.json has a timestamped backup.
-- JSON validation passes.
-- Every new model has the right provider.
-- Every model tag was verified with the provider.
-- defaultModelKey, if changed, uses <model>|<provider>.
-- You did not accidentally paste secrets into the file.
-```
-
-JSON validation does not prove the model will work. It only proves the file can be parsed.
-
-## Reopen Obsidian and test
-
-Start Obsidian again, then open Copilot settings.
-
-Check:
-
-```text
-- The Copilot settings page loads.
-- The new models appear in the model picker.
-- The old default model still works.
-- One new model answers a tiny prompt.
-```
-
-Use a boring test prompt:
+Use a boring prompt:
 
 ```text
 Reply with exactly: ok
 ```
 
-If that works, the model tag and provider route are probably correct.
-
-## Troubleshooting
-
-### My changes disappeared
-
-Obsidian or Copilot probably overwrote the file from memory.
-
-Fix:
-
-1. Quit Obsidian completely.
-2. Restore from the backup if needed.
-3. Reapply the edit.
-4. Validate JSON.
-5. Reopen Obsidian.
-
-### Copilot settings broke
-
-The JSON may be invalid.
-
-Run:
-
-```bash
-python -m json.tool ".obsidian/plugins/copilot/data.json"
-```
-
-If the error is not obvious, restore the backup and make a smaller edit.
-
-### The model appears but fails when selected
-
-The model tag is probably wrong, unavailable, or not accessible through your current Ollama setup.
-
-Check:
+If the model appears but fails, check the tag first:
 
 ```bash
 ollama show "<model-name>"
 ```
 
-Then compare the new entry against a model that already works in Copilot.
+If your changes disappeared, Obsidian probably overwrote the file. Quit Obsidian, restore the backup, and repeat the edit while the app stays closed.
 
-### The default model fails
+## The pattern
 
-Check `defaultModelKey`.
-
-It should look like:
+The useful workflow is simple:
 
 ```text
-<model>|<provider>
-```
-
-For example:
-
-```text
-deepseek-v4-pro:cloud|ollama
-```
-
-The model name in `defaultModelKey` has to match the `name` field of an active model entry.
-
-### I expected this to be local/private
-
-Local Ollama models run on your machine. Ollama Cloud models are accessed through Ollama but run in the cloud. If privacy is the reason you use Ollama, use local model tags instead of `:cloud` tags.
-
-## What I would do differently next time
-
-I would still use direct editing for a batch change, but I would not treat the copied entry as universally correct. The durable pattern is:
-
-```text
-1. Make one model work through the UI.
+1. Make one provider entry work in the UI.
 2. Quit Obsidian.
 3. Back up data.json.
-4. Duplicate the known-good entry.
+4. Duplicate the working entry.
 5. Change one model tag.
-6. Validate and test.
-7. Repeat or generate the rest once the shape is confirmed.
+6. Validate JSON.
+7. Reopen Obsidian and test.
+8. Repeat once the shape is confirmed.
 ```
 
-That keeps the speed benefit without pretending the config schema is more stable than it is.
+That gives you the speed of bulk editing without pretending Copilot's config file is safer or more stable than it is.

@@ -3,29 +3,27 @@ Date: 2026-06-13 01:29
 Category: AI Engineering
 Tags: obsidian, copilot, ollama, local ai, debugging
 Slug: obsidian-copilot-ollama-cloud-models
-Summary: Adding Ollama Cloud models to the Obsidian Copilot plugin by editing its data.json directly: finding the active vault's config, duplicating a model entry, and verifying each tag with ollama show.
+Summary: Adding Ollama Cloud models to the Obsidian Copilot plugin by editing its data.json: finding the active vault's config, duplicating a model entry, and verifying tags with ollama show.
 
-I wanted to add eleven Ollama Cloud models to the Obsidian Copilot plugin at once. The plugin adds models one at a time through its settings screen, so I edited the config file directly instead. Two things needed care: finding the config file Obsidian actually loads, and matching each Ollama tag exactly.
+I wanted to add eleven Ollama Cloud models to the Obsidian Copilot plugin. Its settings screen adds them one at a time, so I edited the config file directly. Two things needed care: finding the file Obsidian actually loads, and matching each Ollama tag exactly.
 
 ## Finding the active vault
 
-Obsidian keeps app-level state separate from per-vault settings. App data lives in the application support directory; vault settings live in each vault's `.obsidian/` directory. The app registry records which vault is currently open:
+Obsidian keeps app-level state in the application support directory and per-vault settings in each vault's `.obsidian/`. The app registry records which vault is open:
 
 ```text
 ~/Library/Application Support/obsidian/obsidian.json
 ```
 
-I had two similarly named vault directories, and only one was open; the registry identified it. The plugin config then sits at a fixed path inside that vault:
+I had two similarly named vaults; the registry showed which one was open. Its Copilot config sits at:
 
 ```text
 <vault>/.obsidian/plugins/copilot/data.json
 ```
 
-In the same `.obsidian/` directory, `community-plugins.json` lists the enabled plugin IDs (including `copilot`), and `manifest.json` gives the plugin version.
-
 ## Inside data.json
 
-`data.json` holds the settings the plugin GUI writes. The top-level fields:
+`data.json` holds the settings the GUI writes. Top-level fields:
 
 ```json
 {
@@ -43,7 +41,7 @@ In the same `.obsidian/` directory, `community-plugins.json` lists the enabled p
 }
 ```
 
-The chat-model table in the GUI is the `activeModels` array. Each entry:
+Chat models go in `activeModels`, embeddings in `activeEmbeddingModels`; `defaultModelKey` and `embeddingModelKey` pick the defaults, in `<model>|<provider>` form. Each `activeModels` entry:
 
 ```json
 {
@@ -65,11 +63,11 @@ The chat-model table in the GUI is the `activeModels` array. Each entry:
 }
 ```
 
-`_keychainOnly` was `true` and every `apiKey` field was empty. Model definitions live in the JSON; API keys live in the macOS Keychain, so editing this file leaves them untouched.
+`_keychainOnly` was `true` and every `apiKey` field was empty: API keys live in the macOS Keychain, not the JSON, so editing the file never touches them.
 
 ## Adding the models
 
-I duplicated the existing `minimax-m3:cloud` entry for each of these models:
+I duplicated the `minimax-m3:cloud` entry for each of these:
 
 ```text
 deepseek-v4-flash
@@ -85,7 +83,7 @@ nemotron-3-ultra
 qwen3.5
 ```
 
-Most Ollama Cloud models use a plain `:cloud` suffix, so I appended it to every name. Two then failed: `gemma4` and `gpt-oss` returned "not found". Copilot passes the configured `name` straight to Ollama, so each tag has to match an existing model exactly.
+Most Ollama Cloud models use a plain `:cloud` suffix, so I appended it to every name. Two failed: `gemma4` and `gpt-oss` returned "not found". Copilot passes `name` straight to Ollama, so each tag must match an existing model exactly.
 
 ## Verifying the model tags
 
@@ -95,7 +93,7 @@ Most Ollama Cloud models use a plain `:cloud` suffix, so I appended it to every 
 ollama show "<model-name>"
 ```
 
-Running it on the two failures gave the correct tags:
+On the two failures it gave the correct tags:
 
 ```text
 gemma4:31b-cloud
@@ -119,11 +117,9 @@ nemotron-3-ultra:cloud
 qwen3.5:cloud
 ```
 
-A final `ollama show` pass confirmed every tag.
-
 ## Editing safely
 
-If Obsidian is open while you edit, it can write its in-memory settings back over the file on shutdown and discard your changes. The procedure I used:
+If Obsidian is open while you edit, it can overwrite the file with its in-memory settings on shutdown, discarding your changes. The procedure I used:
 
 1. Find the active vault from `obsidian.json`.
 2. Back up `data.json` with a timestamp.
@@ -131,10 +127,3 @@ If Obsidian is open while you edit, it can write its in-memory settings back ove
 4. Validate the JSON with `jq`.
 5. Confirm each tag with `ollama show`.
 6. Restart Obsidian so the plugin reloads the file.
-
-## Reference
-
-- Chat models live in `activeModels`; embedding models in `activeEmbeddingModels`.
-- `defaultModelKey` uses a `<model>|<provider>` format.
-- With `_keychainOnly` set, API keys stay in the Keychain, not the JSON.
-- Model `name` values must be exact Ollama tags, not the GUI's display names.

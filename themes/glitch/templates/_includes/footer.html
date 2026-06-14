@@ -1,5 +1,8 @@
 <footer class="site-foot">
-  <span><span class="glitchtxt">©</span> {{ CURRENT_YEAR|default(2026) }} {{ AUTHOR }} — built with Pelican</span>
+  <span class="foot-meta">
+    <span><span class="glitchtxt">©</span> {{ CURRENT_YEAR|default(2026) }} {{ AUTHOR }} — built with Pelican</span>
+    <span class="skill-credit">built with <a href="https://github.com/alexiseverage/aesthetic-frontend-skills">aesthetic-frontend-skills</a></span>
+  </span>
   <span class="links">
     {% if FEED_ALL_ATOM %}<a href="{{ SITEURL }}/{{ FEED_ALL_ATOM }}">RSS</a>{% endif %}
     <a href="https://github.com/xlyk" rel="me">GitHub</a>

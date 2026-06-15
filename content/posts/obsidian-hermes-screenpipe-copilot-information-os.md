@@ -1,73 +1,63 @@
 Title: An Information Operating System: Obsidian, Hermes, Screenpipe, and Obsidian Copilot
-Date: 2026-06-15 10:02
+Date: 2026-06-14 00:00
 Category: AI Engineering
 Tags: obsidian, hermes, screenpipe, copilot, ai agents, information systems, automation
 Slug: obsidian-hermes-screenpipe-copilot-information-os
-Summary: A system description of using Obsidian, Hermes, Screenpipe, and Hermes scheduled tasks as an information operating system.
+Summary: How Obsidian, Hermes, Screenpipe, and the Obsidian Copilot plugin run as one system.
 
-Obsidian is not a second brain in this system.
+# An Information Operating System
 
-It is a filesystem with an operating contract that agents can safely use.
+*How Obsidian, Hermes, Screenpipe, and the Obsidian Copilot plugin run as one system.*
 
-That is the core shape. Notes need addresses. Agents need rules. Background work needs a scheduler. Captured activity needs a destination. Query and editing tools need a shared substrate.
+Most people call a setup like this a "second brain." That label misses what matters. Here, Obsidian is not a second brain but a filesystem with an operating contract: notes have addresses, and agents have rules they can follow safely.
 
-This is not a setup guide. It describes a system composed of Obsidian, Hermes, Screenpipe, Hermes scheduled tasks, and the Obsidian Copilot plugin.
+That is the whole shape. Notes need addresses, agents need rules, background work needs a scheduler, captured activity needs a destination, and the tools that query and edit it all need a shared substrate.
+
+This is not a setup guide. It describes how five pieces fit together: Obsidian, Hermes, the Hermes scheduler, Screenpipe, and the Obsidian Copilot plugin.
 
 ## The contract
 
-Obsidian stores the files. The folder layout gives notes a place to live: inbox, projects, areas, archives, maps, raw material, and support files.
+Obsidian stores the files, and the folder layout gives every note a home: inbox, projects, areas, archives, maps, raw material, support.
 
-The README at the root of the vault matters more than the folder names. It defines what belongs where, what is protected, what can be patched, and when review is required.
+The folders matter least. The README at the root of the vault matters most. It defines what belongs where, what is protected, what an agent may patch, and when a human must review a change first.
 
-Without that README, the vault is just Markdown. With it, the vault has an API.
+Without the README, the vault is just Markdown. With it, the vault has an API.
 
 ## The operator
 
-Hermes is the operator.
+Hermes operates the vault. It reads the README, inspects files, triages the inbox, runs checks, coordinates workers, and writes results back.
 
-It can read the README, inspect files, triage inbox material, run checks, coordinate workers, and write results back into the vault.
-
-Hermes scheduled tasks are the scheduler. This does not mean Unix `crontab`. The scheduler is part of Hermes. It can run agent workflows, no-agent scripts, skill-backed processes, and watchdogs.
-
-That is where the system stops being manual. Inbox triage, health reports, Screenpipe summaries, Kanban and watchdog loops, reminders, and review checks can run without a human opening a chat and asking for each step.
+The scheduler belongs to Hermes — not Unix cron, but a native layer that runs agent workflows, plain scripts, skill-backed processes, and watchdogs. Here the system stops being manual. Inbox triage, health reports, Screenpipe summaries, Kanban loops, watchdogs, reminders, and review checks all run without anyone opening a chat to ask.
 
 ## The capture layer
 
-Screenpipe captures local activity signals.
+Screenpipe captures local activity: screenshots, transcripts, OCR, audio, private logs. None of it leaves the machine, and that boundary is the point.
 
-Raw screenshots, transcripts, OCR, audio, and private logs do not need to leave the machine. Raw capture stays local.
-
-Work leaves traces. Screenpipe can turn those traces into summaries or candidates. Hermes can route those into the vault under the README rules.
-
-The capture layer reduces dependence on manual note-taking. It does not remove the need for review.
+Work leaves traces. Screenpipe turns those traces into summaries or candidates and writes them directly into the vault, under the same README contract Hermes follows. You take fewer notes by hand. You still review what lands.
 
 ## The interface
 
-Obsidian Copilot means the Obsidian plugin, not GitHub Copilot.
+"Obsidian Copilot" means the Obsidian plugin, not GitHub Copilot.
 
-Hermes works from outside the vault. Obsidian Copilot works from inside Obsidian. Hermes is better for actions: edits, checks, scheduled tasks, and worker coordination. Copilot is better for asking questions while reading or writing inside the vault.
-
-Same files. Different interface.
+Hermes and Copilot work the same files from opposite sides. Hermes works from outside the vault and does things: edits, checks, scheduled tasks, worker coordination. Copilot works inside Obsidian and answers questions while you read or write. Same files, different interface.
 
 ## The loop
 
-The loop is simple:
+The cycle is simple:
 
 1. Work happens.
-2. Screenpipe captures local signal.
-3. A pipe or Hermes scheduled task extracts something small.
+2. Screenpipe captures the local signal.
+3. A pipe or scheduled task extracts something small.
 4. Hermes applies the vault rules.
 5. Obsidian stores the result.
-6. Hermes or Obsidian Copilot queries or edits it later.
+6. Later, Hermes or Copilot queries or edits it.
 
-That is why "information operating system" fits better than "agent memory." Memory is one behavior. The system is the coordination: filesystem, contract, scheduler, capture, interface, feedback.
+This is why "information operating system" fits better than "agent memory." Memory is one behavior. The system is the coordination around it: filesystem, contract, scheduler, capture, interface, feedback.
 
 ## The failure modes
 
-This is still rough.
+It is still rough, and it breaks in predictable ways. Rules drift. Summaries need review. Background jobs fail silently. Screenpipe demands a hard privacy boundary. Vague contracts make agents write junk. Scheduled tasks decay into automation theater once they stop producing anything useful.
 
-Rules drift. Generated summaries need review. Background jobs can fail silently. Screenpipe needs a hard privacy boundary. Agents write junk when the contract is vague. Hermes scheduled tasks can become automation theater if they stop producing useful output.
+So the boring parts carry the weight: logs, dated reports, protected zones, watchdogs, non-destructive checks.
 
-So the boring parts matter: logs, dated reports, protected zones, watchdogs, and non-destructive checks.
-
-The system is not an autonomous vault. It is an operable vault.
+The system is not an autonomous vault. It is an operable one.

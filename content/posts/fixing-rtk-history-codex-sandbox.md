@@ -5,7 +5,7 @@ Tags: codex, rtk, sqlite, sandboxing, developer tooling
 Slug: fixing-rtk-history-codex-sandbox
 Summary: RTK commands worked in Codex while its SQLite history stayed empty. The fix was a writable root for RTK's global database.
 
-I had RTK enabled in Codex. `rtk ls -las` worked. `rtk cat README.md` worked. Then `rtk gain -H` showed one old command and none of the calls I had run.
+I had [RTK](https://github.com/rtk-ai/rtk) enabled in [Codex](https://github.com/openai/codex). `rtk ls -las` worked. `rtk cat README.md` worked. Then `rtk gain -H` showed one old command and none of the calls I had run.
 
 The commands and the history report disagreed because RTK has two jobs. It filters command output, then records token savings in a SQLite database. The first job worked inside the Codex sandbox. The second needed write access outside the repository.
 
